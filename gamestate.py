@@ -88,6 +88,21 @@ def foreground_exe():
         kernel32.CloseHandle(handle)
 
 
+def foreground_title():
+    """Title bar text of the focused window ('' if there isn't one).
+
+    Only used to recognise the overlay's own settings panel. Focusing the panel
+    takes focus off the game, which would otherwise auto-hide the very overlay
+    you opened the panel to adjust.
+    """
+    hwnd = user32.GetForegroundWindow()
+    if not hwnd:
+        return ""
+    buf = ctypes.create_unicode_buffer(256)
+    user32.GetWindowTextW(hwnd, buf, len(buf))
+    return buf.value
+
+
 def game_running(exe_match=GAME_EXE):
     """True if any process's image name matches. Unknown counts as running.
 

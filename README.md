@@ -1,14 +1,15 @@
-# Palworld Type Chart Overlay
+# Palworld Overlay
 
-An always-on-top, click-through diagram of Palworld's element chart, pinned to the
-top-left of the screen. No window frame and no background panel: just colored
-nodes and arrows over whatever is behind them.
+Always-on-top, click-through overlays for Palworld, with a settings panel to
+position and size them. Right now there's one: a diagram of the element chart.
+No window frame and no background panel, just colored nodes and arrows over
+whatever is behind them.
 
-The mouse passes straight through it, so it can't be clicked, dragged, focused,
-or alt-tabbed to. It never steals focus from the game.
+The mouse passes straight through, so an overlay can't be clicked, dragged,
+focused, or alt-tabbed to. It never steals focus from the game.
 
-Once installed it runs itself: the watcher starts the chart when Palworld
-launches, and the chart quits when Palworld does.
+Once installed it runs itself: the watcher starts the overlay when Palworld
+launches, and the overlay quits when Palworld does.
 
 ## Run it
 
@@ -16,36 +17,114 @@ Set and forget (see [Autostart](#autostart)), or by hand:
 
 | | |
 | --- | --- |
-| **Overlay Watcher.bat** | waits for Palworld, then starts the chart |
-| **Palworld Overlay.bat** | starts the chart right now, no waiting |
+| **Overlay Watcher.bat** | waits for Palworld, then starts the overlay |
+| **Palworld Overlay.bat** | starts the overlay right now, no waiting |
+| **Overlay Settings.bat** | opens the control panel (or press `Ctrl+Alt+O`) |
 
 Stdlib only (tkinter + ctypes), nothing to install.
 
 ## How the pieces fit
 
+Two processes that never talk directly. The panel writes `settings.json`, the
+overlay stats it once a tick and reloads when the mtime moves, so sliders move
+the real thing while you watch. The panel therefore works with the game closed,
+and a panel crash can't take the overlay down.
+
+```
+watcher.py  (resident, ~12 MB, asleep 5s at a time)
+   |-- Ctrl+Alt+O ---> panel.py       (on demand)
+   |                      | writes
+   |                  settings.json
+   |                      | mtime poll, 250 ms
+   '-- game starts --> overlay.py     (reads, applies live)
+```
+
 | File | Job |
 | --- | --- |
-| `overlay.py` | draws the chart, handles hotkeys, hides on menus, quits with the game |
+| `overlay.py` | windows, Win32 plumbing, tick loop. Draws nothing itself |
+| `panel.py` | the settings window, generated from the module registry |
+| `modules/` | what actually gets drawn, one module per overlay |
+| `settings.py` | load, coerce, save; the contract between the two processes |
 | `watcher.py` | idles until Palworld appears, then launches `overlay.py` |
-| `gamestate.py` | the Win32 bit both of them ask: is the game running, is a UI open |
+| `gamestate.py` | the Win32 bit they ask: is the game running, is a UI open |
+| `hotkeys.py` | global hotkeys with no window, shared by watcher and overlay |
+| `launcher.py` | spawning a sibling script without loading tkinter to do it |
 | `icons/` | the nine element icons |
 
 Idle cost is the watcher alone, about 12 MB, asleep 5 seconds at a time. The
-overlay (about 24 MB) only exists while you're in the game.
+overlay (about 24 MB) only exists while you're in the game, and the panel only
+while it's open.
 
 ## Hotkeys
 
 | Key | Does |
 | --- | --- |
 | `Ctrl+Alt+P` | show / hide |
+| `Ctrl+Alt+O` | open the settings panel |
 | `Ctrl+Alt+Shift+P` | quit |
 
-The hotkeys are global, so they work while Palworld has focus. Since the window
-is click-through and hidden from the taskbar, `Ctrl+Alt+Shift+P` is the way out.
+The hotkeys are global, so they work while Palworld has focus. Since the windows
+are click-through and hidden from the taskbar, `Ctrl+Alt+Shift+P` is the way out.
+
+`Ctrl+Alt+O` is registered by the watcher, so it works with Palworld closed. The
+overlay asks for the same key as a fallback for when the watcher isn't up, and
+whichever gets there first wins - either one opens the same panel.
+
+## Settings
+
+Everything is on the panel: position, size and opacity per module, plus the
+general behaviour toggles. Changes land on a running overlay within a quarter
+second, and `settings.json` sits next to the scripts (gitignored - it's yours).
+
+While the panel has focus the overlay stays on screen even with "Only while
+playing" on, since otherwise focusing the panel would hide the very thing you're
+positioning.
+
+| Setting | Default | Notes |
+| --- | --- | --- |
+| Position X / Y | `282, 24` | top-left corner on screen; tucked just right of the party EXP bars, which end around x=274 on a 1920x1080 client area. Sliders span every monitor |
+| Size | `0.75` | icons land on 24px here; `1.0` gives native 48px |
+| Opacity | `0.92` | lower is more see-through |
+| Element names | on | off shrinks the chart a fair bit |
+| Settings hotkey in the middle | on | small `CTRL+ALT+O` reminder in the empty centre of the ring; hides itself under about 0.45 size, where it would overlap the glyphs |
+| Only while playing | on | hide whenever a game UI is open (see below) |
+| Close with Palworld | on | quit once Palworld's process is gone |
+| Hotkey reminder | `6 s` | launch reminder; `0` hides it |
+
+Arrow keys nudge a focused slider by exactly one step, which is how you land a
+position on the pixel.
+
+## Adding a module
+
+The panel and the host are both generated from `modules/MODULES`. A new overlay
+is a class and a line in that list - neither `panel.py` nor `overlay.py` changes:
+
+```python
+class Compass(Module):
+    id = "compass"
+    name = "Compass"
+    settings = placement(x=800, y=40) + (
+        Toggle("degrees", "Show degrees", True),
+    )
+
+    def draw(self, canvas, cfg):
+        ...
+        return width, height   # the host sizes and places the window from this
+```
+
+`placement()` supplies the enabled / position / size / opacity settings every
+drawn module has. Declare anything else as `Slider`, `Toggle` or `Choice` and
+the panel builds the control for it, coerces whatever ends up in the JSON, and
+resets it with the rest. Each module gets its own layered window, so they can
+sit anywhere on screen at their own size and opacity - Windows sets alpha per
+window, so there's no other way to do it.
+
+`draw` is called on an empty canvas whenever anything but position or opacity
+changes, so it can be a plain redraw with no diffing.
 
 ## Auto-hide
 
-With `AUTO_HIDE = True` the chart is only up during actual gameplay. It hides
+With **Only while playing** on, the chart is only up during actual gameplay. It hides
 the moment you open anything (inventory, Pal box, map, build menu, pause) and
 whenever Palworld isn't the focused window.
 
@@ -57,9 +136,10 @@ Palworld's window title is literally `"Pal  "` and a browser tab on the wiki
 would otherwise match it.
 
 Because the overlay stays hidden while the game isn't focused, it would be
-invisible on the desktop with nothing to react to. Two escape hatches: it always
-shows for the first `HINT_SECONDS` after launch so you get confirmation it
-started, and `AUTO_HIDE = False` pins it up permanently.
+invisible on the desktop with nothing to react to. Three escape hatches: it
+always shows for the first few seconds after launch so you get confirmation it
+started, it stays up while the settings panel has focus, and turning **Only
+while playing** off pins it up permanently.
 
 `Ctrl+Alt+P` still wins over all of this. Toggling off keeps it off regardless
 of game state.
@@ -88,9 +168,9 @@ Each element's weakness is just the arrow pointing at it.
 the element in lowercase (`fire.png`, `dragon.png`, ...). Node spacing scales off
 whatever size the icons load at, so swapping in bigger or smaller art just works.
 
-`overlay.py` also carries a full set of hand-drawn vector glyphs as a fallback.
-Any element missing from `icons/` falls back to its drawn glyph, so deleting a
-file is a safe way to compare the two.
+`modules/typechart.py` also carries a full set of hand-drawn vector glyphs as a
+fallback. Any element missing from `icons/` falls back to its drawn glyph, so
+deleting a file is a safe way to compare the two.
 
 Re-downloading them (the CDN serves WebP unless you ask for PNG, and Tk can't
 read WebP):
@@ -99,22 +179,6 @@ read WebP):
 Invoke-WebRequest -Uri 'https://static.wikia.nocookie.net/palworld/images/5/5e/Fire_icon.png/revision/latest?format=original' `
   -OutFile icons\fire.png -Headers @{ Accept = 'image/png' }
 ```
-
-## Tweaking
-
-Settings live in a block at the top of `overlay.py`:
-
-| Setting | Default | Notes |
-| --- | --- | --- |
-| `POS` | `(282, 24)` | top-left corner on screen; tucked just right of the party EXP bars, which end around x=274 on a 1920x1080 client area |
-| `OFFSET_WIDTHS` | `0` | extra shift right, in multiples of its own width |
-| `SCALE` | `0.75` | icons land on 24px here; `1.0` gives native 48px |
-| `AUTO_HIDE` | `True` | hide whenever a game UI is open (see below) |
-| `GAME_EXE` | `"palworld"` | matched against the focused window's exe path |
-| `OPACITY` | `0.92` | lower is more see-through |
-| `START_HIDDEN` | `False` | launch hidden and wait for the hotkey |
-| `HINT_SECONDS` | `6` | launch hotkey reminder; `0` disables it |
-| `EXIT_WITH_GAME` | `True` | quit once Palworld's process is gone |
 
 ## Autostart
 

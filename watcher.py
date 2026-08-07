@@ -1,31 +1,39 @@
-"""Starts the overlay when Palworld starts.
+"""Starts the overlay when Palworld starts, and opens the settings panel on demand.
 
-The other half of the pairing lives in overlay.py: it quits on its own once the
-game's process is gone (EXIT_WITH_GAME), so this only ever has to handle the
-launch side. One overlay per game session - if you quit it by hand with
-Ctrl+Alt+Shift+P mid-session, it stays quit until you next start Palworld.
+Two jobs, both cheap:
+
+    poll        launch overlay.py once per game session
+    Ctrl+Alt+O  open panel.py
+
+The overlay quits on its own once the game's process is gone (the general
+"Close with Palworld" setting), so this only ever handles the launch side. One
+overlay per game session - if you quit it by hand with Ctrl+Alt+Shift+P
+mid-session, it stays quit until you next start Palworld.
+
+This is the process that's always resident, which is why it owns the panel
+hotkey: the panel then opens whether or not Palworld is running. The overlay
+asks for the same hotkey as a fallback for when the watcher isn't up, and
+whichever registers first wins.
 
 Idles as a bare Python process with no tkinter loaded, waking every few seconds
-to walk the process table.
+to walk the process table. Both panel and overlay are spawned as separate
+processes, so neither drags a UI toolkit in here.
 
     pyw -3.10 watcher.py
 Or double-click "Overlay Watcher.bat".
 """
 
 import ctypes
-import subprocess
 import sys
 import time
-from pathlib import Path
 
 import gamestate
+import hotkeys
+import launcher
 
 POLL_SECONDS = 5
 GAME_EXE = "palworld"
 
-HERE = Path(__file__).resolve().parent
-OVERLAY = HERE / "overlay.py"
-CREATE_NO_WINDOW = 0x08000000
 MUTEX_NAME = "PalworldOverlayWatcher"
 ERROR_ALREADY_EXISTS = 183
 
@@ -42,19 +50,18 @@ def _claim_single_instance():
     return ctypes.get_last_error() != ERROR_ALREADY_EXISTS
 
 
-def _launch():
-    # sys.executable is pythonw.exe when this was started with pyw, so the child
-    # inherits the same no-console behaviour
-    subprocess.Popen([sys.executable, str(OVERLAY)], cwd=str(HERE),
-                     creationflags=CREATE_NO_WINDOW, close_fds=True)
-
-
 def main():
+    # panel.py holds its own mutex and just focuses the open window on a repeat
+    # press, so this can stay a dumb spawn.
+    hotkeys.listen_in_background({
+        "panel": (hotkeys.CTRL_ALT, hotkeys.vk("O"), lambda: launcher.spawn("panel.py")),
+    })
+
     launched_this_session = False
     while True:
         if gamestate.game_running(GAME_EXE):
             if not launched_this_session:
-                _launch()
+                launcher.spawn("overlay.py")
                 launched_this_session = True
         else:
             launched_this_session = False  # re-arm for the next time the game opens

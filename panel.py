@@ -56,10 +56,10 @@ def _focus_existing() -> None:
 
 # ---------------- widgets ----------------
 
-def _format(setting, value) -> str:
+def _number(setting, value) -> str:
+    """A slider's value as bare text, no unit - this goes in an editable box."""
     if isinstance(setting, Slider):
-        text = f"{int(value)}" if setting.integral else f"{value:.2f}"
-        return f"{text} {setting.unit}".strip()
+        return f"{int(value)}" if setting.integral else f"{value:.2f}"
     return str(value)
 
 
@@ -128,7 +128,7 @@ class Panel:
         row = 0
         if module.blurb:
             ttk.Label(frame, text=module.blurb, foreground="#666",
-                      wraplength=460, justify="left").grid(row=row, column=0, columnspan=3,
+                      wraplength=460, justify="left").grid(row=row, column=0, columnspan=4,
                                                            sticky="w", pady=(0, 8))
             row += 1
 
@@ -136,7 +136,7 @@ class Panel:
             row = self._row(frame, module, setting, row)
 
         ttk.Button(frame, text=f"Reset {module.name}",
-                   command=lambda m=module: self._reset(m.id)).grid(row=row, column=0, columnspan=3,
+                   command=lambda m=module: self._reset(m.id)).grid(row=row, column=0, columnspan=4,
                                                                     sticky="w", pady=(8, 0))
 
     def _row(self, frame, module, setting, row):
@@ -146,7 +146,7 @@ class Panel:
             var = tk.BooleanVar(value=bool(value))
             ttk.Checkbutton(frame, text=setting.label, variable=var,
                             command=lambda: self._change(module.id, setting, var.get())
-                            ).grid(row=row, column=0, columnspan=3, sticky="w", pady=2)
+                            ).grid(row=row, column=0, columnspan=4, sticky="w", pady=2)
             self._refreshers.append(
                 lambda: var.set(bool(self.settings.get(module.id, setting.key))))
 
@@ -155,7 +155,7 @@ class Panel:
             var = tk.StringVar(value=str(value))
             box = ttk.Combobox(frame, textvariable=var, values=list(setting.options),
                                state="readonly")
-            box.grid(row=row, column=1, columnspan=2, sticky="ew", pady=2)
+            box.grid(row=row, column=1, columnspan=3, sticky="ew", pady=2)
             box.bind("<<ComboboxSelected>>",
                      lambda _: self._change(module.id, setting, var.get()))
             self._refreshers.append(
@@ -164,15 +164,34 @@ class Panel:
         elif isinstance(setting, Slider):
             ttk.Label(frame, text=setting.label).grid(row=row, column=0, sticky="w", padx=(0, 10))
             var = tk.DoubleVar(value=float(value))
-            readout = ttk.Label(frame, text=_format(setting, value), width=8, anchor="e")
-            readout.grid(row=row, column=2, sticky="e", padx=(8, 0))
+            #: what the box shows. Kept in step with the handle, but the source
+            #: of truth only while it's being typed into.
+            text = tk.StringVar(value=_number(setting, value))
 
-            def slide(raw, s=setting, v=var, m=module.id, lbl=readout, snap=False):
-                return self._slide(m, s, raw, v, lbl, snap)
+            def slide(raw, s=setting, v=var, m=module.id, t=text, snap=False):
+                return self._slide(m, s, raw, v, t, snap)
 
             scale = ttk.Scale(frame, from_=setting.lo, to=setting.hi, variable=var,
                               command=slide)
             scale.grid(row=row, column=1, sticky="ew", pady=2)
+
+            entry = ttk.Entry(frame, textvariable=text, width=7, justify="right")
+            entry.grid(row=row, column=2, sticky="e", padx=(10, 0))
+            if setting.unit:
+                ttk.Label(frame, text=setting.unit, foreground="#888", width=2).grid(
+                    row=row, column=3, sticky="w", padx=(3, 0))
+
+            def commit(_=None, s=setting, v=var, t=text, m=module.id):
+                self._commit_text(m, s, v, t)
+
+            entry.bind("<Return>", commit)
+            entry.bind("<KP_Enter>", commit)
+            entry.bind("<FocusOut>", commit)
+            entry.bind("<Escape>",
+                       lambda _, s=setting, t=text, m=module.id:
+                       t.set(_number(s, self.settings.get(m, s.key))))
+            # select-all on focus, so typing a new value replaces rather than appends
+            entry.bind("<FocusIn>", lambda e: e.widget.select_range(0, "end"))
 
             # ttk.Scale's own arrow keys move by a fraction of the range, which
             # is useless for pixel-nudging a slider spanning the whole desktop.
@@ -184,10 +203,10 @@ class Panel:
             # snap the handle onto the coerced value once the drag ends
             scale.bind("<ButtonRelease-1>", lambda _, v=var: slide(v.get(), snap=True))
 
-            def refresh(s=setting, v=var, m=module.id, lbl=readout):
+            def refresh(s=setting, v=var, m=module.id, t=text):
                 current = self.settings.get(m, s.key)
                 v.set(float(current))
-                lbl.configure(text=_format(s, current))
+                t.set(_number(s, current))
             self._refreshers.append(refresh)
 
         else:
@@ -197,12 +216,12 @@ class Panel:
             row += 1
             ttk.Label(frame, text=setting.help, foreground="#888", wraplength=440,
                       justify="left", font=("Segoe UI", 8)).grid(
-                row=row, column=0, columnspan=3, sticky="w", pady=(0, 6))
+                row=row, column=0, columnspan=4, sticky="w", pady=(0, 6))
         return row + 1
 
     # ---------------- changes ----------------
 
-    def _slide(self, module_id, setting, raw, var, readout, snap=False):
+    def _slide(self, module_id, setting, raw, var, text, snap=False):
         """A slider moved.
 
         The stored value is always the coerced one, but the handle only gets
@@ -212,9 +231,32 @@ class Panel:
         coerced value is a no-op, so it settles immediately.
         """
         stored = self.settings.set(module_id, setting.key, raw)
-        readout.configure(text=_format(setting, stored))
+        text.set(_number(setting, stored))
         if snap and var.get() != stored:
             var.set(stored)
+        self._touch()
+
+    def _commit_text(self, module_id, setting, var, text):
+        """Take what was typed into a slider's box, or put back what's real.
+
+        Setting.coerce turns anything unparseable into the *default*, which is a
+        nasty surprise when you fat-finger a position you spent a minute
+        dialling in. So parsing happens here and a junk box just reverts to the
+        live value; only a genuine number reaches coerce, which clamps it.
+
+        The unit is stripped first, so pasting "282 px" straight back in works.
+        """
+        typed = text.get().strip()
+        if setting.unit and typed.lower().endswith(setting.unit.lower()):
+            typed = typed[:-len(setting.unit)].strip()
+        try:
+            parsed = float(typed)
+        except ValueError:
+            text.set(_number(setting, self.settings.get(module_id, setting.key)))
+            return
+        stored = self.settings.set(module_id, setting.key, parsed)
+        var.set(stored)  # moves the handle, whose command refreshes the box
+        text.set(_number(setting, stored))
         self._touch()
 
     def _change(self, module_id, setting, value):

@@ -91,8 +91,14 @@ positioning.
 | Close with Palworld | on | quit once Palworld's process is gone |
 | Hotkey reminder | `6 s` | launch reminder; `0` hides it |
 
-Arrow keys nudge a focused slider by exactly one step, which is how you land a
-position on the pixel.
+Every slider has a typable box next to it for when you know the number you want.
+Enter or clicking away commits it, Escape cancels, and anything unparseable
+reverts to the live value rather than snapping back to the default. The unit is
+stripped on the way in, so pasting `282 px` back works. Arrow keys nudge a
+focused slider by exactly one step.
+
+Position sliders span the whole virtual desktop, second monitors included, so
+the range goes negative when a monitor sits left of the primary one.
 
 ## Adding a module
 

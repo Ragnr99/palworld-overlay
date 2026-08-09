@@ -41,6 +41,7 @@ from settings import Settings
 GAME_EXE = "palworld"    # matched against the focused window's executable path
 
 TICK_MS = 250            # toggle responsiveness, and how fast panel edits land
+LIVE_TICK_MS = 100       # how often modules that move on their own get redrawn
 TOPMOST_EVERY_MS = 2000  # re-assert always-on-top this often (games steal Z-order)
 GAME_CHECK_EVERY_MS = 2000
 
@@ -135,6 +136,11 @@ class ModuleWindow:
         if "opacity" in changed:
             self.win.attributes("-alpha", cfg["opacity"])
 
+    def update_live(self) -> None:
+        """Let a live module move its own artwork. Never called before a draw."""
+        if self.cfg and self.shown:
+            self.module.update(self.canvas, self.cfg)
+
     def _redraw(self) -> None:
         self.canvas.delete("all")
         width, height = self.module.draw(self.canvas, self.cfg)
@@ -195,7 +201,10 @@ class Overlay:
 
         self.settings = Settings()
         self.windows = {m.id: ModuleWindow(self.root, m) for m in DRAWN}
+        #: the ones that change on their own and so need more than the settings tick
+        self.live = [w for w in self.windows.values() if w.module.live]
 
+        self.alive = True
         self.enabled = True   # what Ctrl+Alt+P controls
         self._toggle_req = False
         self._quit_req = False
@@ -222,6 +231,8 @@ class Overlay:
             "panel": (hotkeys.CTRL_ALT, hotkeys.vk("O"), self._req_panel),
         })
         self.root.after(TICK_MS, self._tick)
+        if self.live:
+            self.root.after(LIVE_TICK_MS, self._live_tick)
 
     # the hotkey thread only ever sets these flags; tkinter is driven from _tick
     def _req_toggle(self):
@@ -269,9 +280,24 @@ class Overlay:
             return False
         return self._saw_game
 
+    def _shutdown(self):
+        """Stop the loops before tearing Tk down, so nothing ticks a dead window."""
+        self.alive = False
+        self.root.destroy()
+
+    def _live_tick(self):
+        """Move what moves. Separate from _tick because a minimap at 250ms
+        stutters, and re-reading settings.json at 10Hz to fix that would be
+        four times the disk work for the sake of one module."""
+        if not self.alive:
+            return
+        for window in self.live:
+            window.update_live()
+        self.root.after(LIVE_TICK_MS, self._live_tick)
+
     def _tick(self):
         if self._quit_req:
-            self.root.destroy()
+            self._shutdown()
             return
         if self._toggle_req:
             self._toggle_req = False
@@ -293,7 +319,7 @@ class Overlay:
         # walking the process table is heavier than the rest of the tick, so it
         # runs on its own slower cadence
         if self._ticks % max(1, GAME_CHECK_EVERY_MS // TICK_MS) == 0 and self._outlived_game():
-            self.root.destroy()
+            self._shutdown()
             return
 
         self.root.after(TICK_MS, self._tick)

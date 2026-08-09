@@ -23,7 +23,7 @@ import tkinter as tk
 from tkinter import ttk
 
 from launcher import PANEL_WINDOW_TITLE
-from modules import MODULES, Choice, Slider, Toggle
+from modules import MODULES, Choice, Slider, Text, Toggle
 from settings import Settings
 
 #: Long enough that a slider drag is one write, short enough to feel live.
@@ -158,6 +158,21 @@ class Panel:
             box.grid(row=row, column=1, columnspan=3, sticky="ew", pady=2)
             box.bind("<<ComboboxSelected>>",
                      lambda _: self._change(module.id, setting, var.get()))
+            self._refreshers.append(
+                lambda: var.set(str(self.settings.get(module.id, setting.key))))
+
+        elif isinstance(setting, Text):
+            ttk.Label(frame, text=setting.label).grid(row=row, column=0, sticky="w", padx=(0, 10))
+            var = tk.StringVar(value=str(value))
+            entry = ttk.Entry(frame, textvariable=var,
+                              show="•" if setting.secret else "")
+            entry.grid(row=row, column=1, columnspan=3, sticky="ew", pady=2)
+            # Written on every keystroke. The save debounce already collapses a
+            # burst of edits into one write, which is the same thing it does for
+            # a slider drag, so typing a hostname is one save and not twelve.
+            var.trace_add("write",
+                          lambda *_, s=setting, v=var, m=module.id:
+                          self._change(m, s, v.get()))
             self._refreshers.append(
                 lambda: var.set(str(self.settings.get(module.id, setting.key))))
 

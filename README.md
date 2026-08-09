@@ -1,9 +1,10 @@
 # Palworld Overlay
 
 Always-on-top, click-through overlays for Palworld, with a settings panel to
-position and size them. Right now there's one: a diagram of the element chart.
-No window frame and no background panel, just colored nodes and arrows over
-whatever is behind them.
+position and size them. Two of them so far: a diagram of the element chart, and
+a live minimap that shows where you are without opening the in-game map. No
+window frame and no background panel, just the artwork over whatever is behind
+it.
 
 The mouse passes straight through, so an overlay can't be clicked, dragged,
 focused, or alt-tabbed to. It never steals focus from the game.
@@ -47,6 +48,7 @@ watcher.py  (resident, ~12 MB, asleep 5s at a time)
 | `settings.py` | load, coerce, save; the contract between the two processes |
 | `watcher.py` | idles until Palworld appears, then launches `overlay.py` |
 | `gamestate.py` | the Win32 bit they ask: is the game running, is a UI open |
+| `position.py` | where the player is, polled off the UI thread. See [Minimap](#minimap) |
 | `hotkeys.py` | global hotkeys with no window, shared by watcher and overlay |
 | `launcher.py` | spawning a sibling script without loading tkinter to do it |
 | `icons/` | the nine element icons |
@@ -119,18 +121,33 @@ class Compass(Module):
 ```
 
 `placement()` supplies the enabled / position / size / opacity settings every
-drawn module has. Declare anything else as `Slider`, `Toggle` or `Choice` and
-the panel builds the control for it, coerces whatever ends up in the JSON, and
-resets it with the rest. Each module gets its own layered window, so they can
-sit anywhere on screen at their own size and opacity - Windows sets alpha per
-window, so there's no other way to do it.
+drawn module has. Declare anything else as `Slider`, `Toggle`, `Choice` or
+`Text` and the panel builds the control for it, coerces whatever ends up in the
+JSON, and resets it with the rest. Each module gets its own layered window, so
+they can sit anywhere on screen at their own size and opacity - Windows sets
+alpha per window, so there's no other way to do it.
 
 `draw` is called on an empty canvas whenever anything but position or opacity
 changes, so it can be a plain redraw with no diffing.
 
+A module whose picture changes on its own - not just when a setting does - sets
+`live = True` and implements `update`, which the host calls ten times a second
+on whatever `draw` already put on the canvas:
+
+```python
+    live = True
+
+    def update(self, canvas, cfg):
+        canvas.coords(self._marker, ...)   # move things; don't rebuild them
+```
+
+`update` runs on the UI thread, so it must not block: anything that touches the
+network or disk belongs on a thread of its own, the way `position.py` does it.
+Rebuilding the drawing there instead of moving it would flicker.
+
 ## Auto-hide
 
-With **Only while playing** on, the chart is only up during actual gameplay. It hides
+With **Only while playing** on, the overlay is only up during actual gameplay. It hides
 the moment you open anything (inventory, Pal box, map, build menu, pause) and
 whenever Palworld isn't the focused window.
 
@@ -155,6 +172,75 @@ of game state.
 Nothing can draw over **exclusive fullscreen** without hooking DirectX. If the
 overlay disappears when you tab into the game, set Palworld's video mode to
 *Borderless Window* and it will stay put.
+
+## Minimap
+
+A north-up minimap with you pinned at the centre, the ground scrolling under
+you, a breadcrumb trail behind you and your coordinates along the bottom - in
+the same numbers the in-game map shows. It is up during normal play, so you can
+see where you are without stopping to open the map.
+
+### It needs a dedicated server
+
+This is the catch, and it is worth reading before you turn it on.
+
+The overlay does not hook, inject into, or read the memory of the game, and it
+is not going to start. That leaves exactly one place a player's live position is
+legitimately published: **Palworld's dedicated-server REST API**. So the minimap
+works if you play on a dedicated server - including one running on this same PC,
+just for you - and it does not work in a single-player world or a co-op game
+hosted from the game client, because neither of those publishes anything to read.
+
+On the server, in `PalWorldSettings.ini`:
+
+```ini
+RESTAPIEnabled=True
+RESTAPIPort=8212
+AdminPassword="something"
+```
+
+Then in the panel, under **Minimap**, put in the address, the port and that same
+admin password. Check it without launching anything:
+
+```
+py -3.10 position.py
+```
+
+It prints which source it built, what it asked, and either your coordinates or
+why not. The map says the same thing on screen - `no server`, `bad password`,
+`nobody online` - rather than sitting there empty.
+
+### Demo mode
+
+**Position from → Demo (no game)** walks a fake player around. It's how you
+place and size the map with Palworld closed, and it separates "my overlay is
+misconfigured" from "my server is". Nothing about it touches the game.
+
+### A map image is optional
+
+With no image you get the grid, the trail and the marker floating over the game,
+covering none of it - the same principle as the type chart. Point **Map image
+file** at a square, north-up PNG and it scrolls underneath instead. Tell it what
+area the image covers with **Map image covers** (half its width, in map
+coordinates, measured out from 0,0 at the image's centre), and flip it if it
+comes out upside down. Tk only scales images by whole factors, so the zoom
+snaps to the nearest one and the grid and trail follow whatever it landed on.
+
+No map image ships with this: the game's own map is Pocketpair's art.
+
+### If the numbers disagree with the game
+
+The server reports raw Unreal world coordinates, which get converted into the
+ones the game shows you. If the readout is offset or scaled wrong against the
+in-game map, **Coordinate origin** and **Coordinate scale** at the bottom of the
+section are that conversion, and correcting them fixes the map with it.
+
+### Cost
+
+One HTTP request every half second, on its own thread - a socket timeout against
+a server that isn't there must not freeze every module on screen. The drawing
+updates ten times a second, moving the canvas items `draw` already made rather
+than rebuilding them.
 
 ## Reading the chart
 
@@ -219,4 +305,5 @@ Element icons are the game's own art, from the
 [Palworld Wiki](https://palworld.fandom.com/wiki/Elements). Palworld is by
 Pocketpair. This is an unofficial fan tool with no affiliation, and it reads
 nothing from the game process: no hooks, no injection, no memory access, just
-public Win32 calls about cursor and process state.
+public Win32 calls about cursor and process state - and, if you turn the minimap
+on, your own dedicated server's REST API.

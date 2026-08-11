@@ -4,7 +4,12 @@ A normal, clickable window - the opposite of the overlay itself. Open it with
 Ctrl+Alt+O (the watcher holds that hotkey, so it works with Palworld closed), or
 double-click "Overlay Settings.bat".
 
-Nothing here knows what a type chart is. The whole window is generated from the
+Two tabs. Settings is generated from the module registry, and Quests is the
+quest browser (questbrowser.py). The browser lives here rather than on the
+overlay for a blunt reason: overlay windows are click-through by design, and a
+quest tree you cannot click is a poster.
+
+Nothing here knows what a type chart is. The settings tab is generated from the
 module registry: every Module contributes a section, every Setting contributes a
 row, and the control used is picked from the Setting's type. Registering a new
 module gives it a full settings UI without this file changing.
@@ -90,14 +95,39 @@ class Panel:
 
         self.root = tk.Tk()
         self.root.title(PANEL_WINDOW_TITLE)
-        self.root.geometry("560x720")
-        self.root.minsize(430, 360)
+        # Wide enough for the quest browser's two panes; the settings tab keeps
+        # its own column width and just gains margin.
+        self.root.geometry("1020x740")
+        self.root.minsize(560, 420)
         self._build()
 
     # ---------------- building ----------------
 
     def _build(self):
-        header = ttk.Frame(self.root, padding=(14, 12, 14, 6))
+        self.tabs = ttk.Notebook(self.root)
+        self.tabs.pack(fill="both", expand=True)
+        self.tabs.add(self._settings_tab(), text="  Settings  ")
+
+        # The quest browser reads a 300KB snapshot and builds 117 tree rows, so
+        # it is built the first time the tab is opened rather than on launch -
+        # the panel's job is to be there the instant Ctrl+Alt+O is pressed.
+        self.quests_tab = ttk.Frame(self.tabs, padding=10)
+        self.tabs.add(self.quests_tab, text="  Quests  ")
+        self._quests_built = False
+        self.tabs.bind("<<NotebookTabChanged>>", self._on_tab)
+
+        footer = ttk.Frame(self.root, padding=(14, 8))
+        footer.pack(fill="x")
+        self.status = ttk.Label(footer, foreground="#666", text="")
+        self.status.pack(side="left")
+        ttk.Button(footer, text="Close", command=self.root.destroy).pack(side="right")
+        self.reset_button = ttk.Button(footer, text="Reset all", command=self._reset_all)
+        self.reset_button.pack(side="right", padx=6)
+
+    def _settings_tab(self) -> ttk.Frame:
+        tab = ttk.Frame(self.tabs)
+
+        header = ttk.Frame(tab, padding=(14, 12, 14, 6))
         header.pack(fill="x")
         ttk.Label(header, text="Overlay settings",
                   font=("Segoe UI", 13, "bold")).pack(anchor="w")
@@ -106,19 +136,41 @@ class Panel:
                        "Leave this window focused while you drag - the overlay stays "
                        "on screen so you can see what you're doing.").pack(anchor="w", pady=(2, 0))
 
-        body = ttk.Frame(self.root)
+        body = ttk.Frame(tab)
         body.pack(fill="both", expand=True)
         content = _scrollable(body)
 
         for module in MODULES:
             self._section(content, module)
+        return tab
 
-        footer = ttk.Frame(self.root, padding=(14, 8))
-        footer.pack(fill="x")
-        self.status = ttk.Label(footer, foreground="#666", text="")
-        self.status.pack(side="left")
-        ttk.Button(footer, text="Close", command=self.root.destroy).pack(side="right")
-        ttk.Button(footer, text="Reset all", command=self._reset_all).pack(side="right", padx=6)
+    def _on_tab(self, _event=None):
+        """Build the quest browser on first view, and keep Reset to settings.
+
+        'Reset all' wipes settings.json, which has nothing to do with quests;
+        leaving it live under a quest page invites a click nobody meant.
+        """
+        on_quests = self.tabs.index("current") == 1
+        self.reset_button.configure(state="disabled" if on_quests else "normal")
+        if not on_quests or self._quests_built:
+            return
+        self._quests_built = True
+        try:
+            from questbrowser import QuestBrowser
+            browser = QuestBrowser(self.quests_tab)
+            browser.pack(fill="both", expand=True)
+            browser.show("Main_UnlockFastTravel")
+        except Exception as error:
+            # A missing or unreadable data/quests.json must not take the
+            # settings panel down with it - that is the half people need.
+            # QuestBrowser is a Frame, so it has already parented itself here
+            # before its data load threw; clear that shell out first.
+            for child in self.quests_tab.winfo_children():
+                child.destroy()
+            ttk.Label(self.quests_tab, foreground="#a33", justify="left", wraplength=560,
+                      text=f"Couldn't load the quest data.\n\n{error}\n\n"
+                           "Regenerate it with:  py -3.10 tools/fetch_quests.py"
+                      ).pack(anchor="w", padx=20, pady=20)
 
     def _section(self, parent, module):
         frame = ttk.LabelFrame(parent, text=module.name, padding=(12, 8, 12, 12))

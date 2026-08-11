@@ -1,0 +1,3302 @@
+[
+ {
+  "id": "Main_UnlockFastTravel",
+  "slug": "activate-great-eagle-statue",
+  "name": "Activate Great Eagle Statue",
+  "kind": "Main Mission",
+  "description": "Research Team Members:\nWhile we've only uncovered a mere fraction\nof the mysteries present on the Palpagos Islands,\nthere have been multiple reports regarding the stone statues scattered about the isles.\n\nAlthough the mechanics remain unknown,\nit is possible to instantly travel from one of these bird-like structures to another.\nAs such, using the area around those statues as a base of operations is highly recommended.",
+  "objectives": [
+   {
+    "text": "Hill of Beginnings 240,-512",
+    "map": "Palpagos_Islands",
+    "x": 240,
+    "y": -512
+   }
+  ],
+  "rewards": [
+   "Exp +6"
+  ],
+  "next": [
+   "Main_TutorialStart"
+  ],
+  "prev": []
+ },
+ {
+  "id": "Main_OpenSurvivalGuide",
+  "slug": "how-to-stay-alive",
+  "name": "How to Stay Alive",
+  "kind": "Main Mission",
+  "description": "Intro:\nThis Survival Guide contains the sum of our hard-earned knowledge,\ngained through grueling first-hand experiences.\n\nToo much happens on these islands that defies common sense.\nIf you ever get stuck, look to this guide for help.",
+  "objectives": [],
+  "rewards": [
+   "Exp +6"
+  ],
+  "next": [
+   "Main_BuildWorkbench"
+  ],
+  "prev": [
+   "Main_TutorialStart"
+  ]
+ },
+ {
+  "id": "Main_PickupWood",
+  "slug": "first-gathering-run",
+  "name": "First Gathering Run",
+  "kind": "Main Mission",
+  "description": "Of all the resources you can gather from nature,\n{Wood} is the foundation for nearly every tool and structure.\n\nPick up fallen branches or strike nearby trees to start collecting.",
+  "objectives": [
+   {
+    "text": "Wood 1"
+   }
+  ],
+  "rewards": [
+   "Exp +5"
+  ],
+  "next": [
+   "Main_GainStatus"
+  ],
+  "prev": []
+ },
+ {
+  "id": "Main_BuildWorkBench_Old",
+  "slug": "base-of-operations",
+  "name": "Base of Operations",
+  "kind": "Main Mission",
+  "description": "Materials on their own are merely raw resources.\nBy assembling a Workbench, you'll gain the ability to craft more complex items.\n\nOpen the Build menu, select the {WorkBench}, and choose where to place it.\nThis marks your first step to building your base and surviving these wilds.",
+  "objectives": [],
+  "rewards": [
+   "Exp +8"
+  ],
+  "next": [
+   "Main_UnlockPalSphere"
+  ],
+  "prev": []
+ },
+ {
+  "id": "Main_UnlockPalSphere",
+  "slug": "unlock-technology",
+  "name": "Unlock Technology",
+  "kind": "Main Mission",
+  "description": "On this island, coexistence with Pals is the key to survival.\nAnd it all begins with a single device: the {PalSphere}.\n\nOpen the Technology menu and study its blueprint.\nThe time has come to reclaim the power of the ancients.",
+  "objectives": [],
+  "rewards": [
+   "Exp +8"
+  ],
+  "next": [
+   "Main_CollectCrystal"
+  ],
+  "prev": [
+   "Main_BuildWorkBench_Old"
+  ]
+ },
+ {
+  "id": "Main_CollectCrystal",
+  "slug": "paldium",
+  "name": "Paldium",
+  "kind": "Main Mission",
+  "description": "These islands are home to an extraordinary mineral infused with supernatural energy:\nan ore known as Paldium.\nIt's believed to be deeply connected to the massive tree towering in the distance,\nthough the details remain a mystery.\n\nWhat we do know is that Paldium is a versatile material essential for crafting {PalSphere}s.\nIt's commonly found near water, so explore riversides and wetlands.\n\nIf you spot something glowing blue, try striking it with a pickaxe.\nYou can craft a pickaxe by combining {Stone} and {Wood} at a {WorkBench}.",
+  "objectives": [
+   {
+    "text": "Paldium Fragment 1"
+   }
+  ],
+  "rewards": [
+   "Exp +10"
+  ],
+  "next": [
+   "Main_CraftPalSphere"
+  ],
+  "prev": [
+   "Main_UnlockPalSphere"
+  ]
+ },
+ {
+  "id": "Main_CraftPalSphere",
+  "slug": "capturing-device",
+  "name": "Capturing Device",
+  "kind": "Main Mission",
+  "description": "{PalSphere}s are vessels used to capture Pals.\nThink of them as your key to companionship.\n\nCraft {PalSphere}s by combining materials at a {WorkBench}.\nAll you need is {Wood}, {Stone}, and {Pal_crystal_S}s.",
+  "objectives": [
+   {
+    "text": "Pal Sphere 1"
+   }
+  ],
+  "rewards": [
+   "Exp +12"
+  ],
+  "next": [
+   "Main_CapturePal"
+  ],
+  "prev": [
+   "Main_CollectCrystal"
+  ]
+ },
+ {
+  "id": "Main_CapturePal",
+  "slug": "your-first-pal",
+  "name": "Your First Pal",
+  "kind": "Main Mission",
+  "description": "Throw a {PalSphere} at a Pal to try and capture it.\nTo boost your chances for success, weaken it first.\nOnce you catch your first Pal, the two of you can form a bond unlike any other.",
+  "objectives": [],
+  "rewards": [
+   "Exp +15"
+  ],
+  "next": [
+   "Main_UnlockPalBox"
+  ],
+  "prev": [
+   "Main_CraftPalSphere"
+  ]
+ },
+ {
+  "id": "Main_UnlockPalBox",
+  "slug": "<mapobjectname-id=|palboxv2|/>",
+  "name": "Palbox",
+  "kind": "Main Mission",
+  "description": "To truly coexist with Pals, proper management is essential.\nAncient records describe storage technology known as the {PalBoxV2}.\n\nOpen the Technology screen to learn how to build one.\nThe {PalBoxV2} also has the ability to heal injured Pals.",
+  "objectives": [],
+  "rewards": [
+   "Exp +15"
+  ],
+  "next": [
+   "Main_BuildPalBox"
+  ],
+  "prev": [
+   "Main_CapturePal"
+  ]
+ },
+ {
+  "id": "Main_BuildPalBox",
+  "slug": "starting-base",
+  "name": "Starting Base",
+  "kind": "Main Mission",
+  "description": "Open the Build menu with and place a {PalBoxV2} on a wide, open stretch of land.\nThis will be your first base with your Pals—your launch point for future expeditions.\n\nIf you maintain it well, it will become a vital stronghold when the time comes to face a tower,\nso choose your location carefully.",
+  "objectives": [],
+  "rewards": [
+   "Exp +20"
+  ],
+  "next": [
+   "Main_WorkerPal"
+  ],
+  "prev": [
+   "Main_UnlockPalBox"
+  ]
+ },
+ {
+  "id": "Main_WorkerPal",
+  "slug": "put-pals-to-work",
+  "name": "Put Pals to Work",
+  "kind": "Main Mission",
+  "description": "Pals don't just fight, they can also work alongside you to help keep your base running.\nAccess the {PalBoxV2}, open the Management menu, and assign one of your Pals to the base.",
+  "objectives": [],
+  "rewards": [
+   "Exp +20"
+  ],
+  "next": [
+   "Main_Meal"
+  ],
+  "prev": [
+   "Main_BuildPalBox"
+  ]
+ },
+ {
+  "id": "Main_Meal",
+  "slug": "fill-your-belly",
+  "name": "Fill Your Belly",
+  "kind": "Main Mission",
+  "description": "Whether you're battling or exploring, you can't forget to eat.\nFortunately, this island is home to plants that bear delicious fruit.\n\nKeep an eye out for {Berries}.\nIf you find some, open your inventory and use them to satisfy your hunger.",
+  "objectives": [],
+  "rewards": [
+   "Exp +20"
+  ],
+  "next": [
+   "Main_EquipClothArmor"
+  ],
+  "prev": [
+   "Main_WorkerPal"
+  ]
+ },
+ {
+  "id": "Main_EquipClothArmor",
+  "slug": "protect-yourself",
+  "name": "Protect Yourself",
+  "kind": "Main Mission",
+  "description": "The unforgiving wilds of the Palpagos Islands show mercy to no one.\nTo protect yourself from the cold and harm, you'll need proper clothing.\n\nUnlock the {ClothArmor} technology and craft it at the {WorkBench}.\nYou'll need {Cloth}, which can be made from materials dropped by fluffy Pals that bear {Wool}.\n\nTime to go find something soft and wooly!",
+  "objectives": [],
+  "rewards": [
+   "Exp +1,460"
+  ],
+  "next": [
+   "Main_CaptureSheepBall_Old"
+  ],
+  "prev": [
+   "Main_Meal"
+  ]
+ },
+ {
+  "id": "Main_GainStatus",
+  "slug": "enhance-stats",
+  "name": "Enhance Stats",
+  "kind": "Main Mission",
+  "description": "Gaining EXP and honing your skills are the keys to overcoming the challenges ahead.\nOnce you level up, open your inventory and enhance one of your stats.\nDon't fear change—after all, every journey begins with a single brave step.",
+  "objectives": [],
+  "rewards": [
+   "Exp +5"
+  ],
+  "next": [
+   "Main_BuildWorkbench"
+  ],
+  "prev": [
+   "Main_PickupWood"
+  ]
+ },
+ {
+  "id": "Main_CaptureSheepBall_Old",
+  "slug": "the-weakest-pal",
+  "name": "The Weakest Pal",
+  "kind": "Main Mission",
+  "description": "Only the strong survive on the Palpagos Islands.\n{SheepBall} sit at the very bottom of the food chain, making them easy to catch.\n\nBut don't underestimate them.\nTheir dexterity makes them surprisingly useful for all kinds of tasks.\n\nTry capturing five {SheepBall} to start.\nThey'll be dependable first companions as you grow your base.\nPlus, they can provide essential materials like {Wool} and {Meat_SheepBall}.\n\nIn this harsh world, the key to survival is simple: use every resource you can.",
+  "objectives": [
+   {
+    "text": "Lamball"
+   }
+  ],
+  "rewards": [
+   "Exp +35"
+  ],
+  "next": [
+   "Main_CraftShield"
+  ],
+  "prev": [
+   "Main_EquipClothArmor"
+  ]
+ },
+ {
+  "id": "Main_CraftShield",
+  "slug": "mining-paldium",
+  "name": "Mining Paldium",
+  "kind": "Main Mission",
+  "description": "In battle, you can't dodge forever. But fear not, you can harness the power of Paldium for defense.\nUnlock the {Shield_01} technology and craft it at the {WorkBench}.\nEquip it ahead of time, and you'll be ready for whatever surprise attacks come your way.",
+  "objectives": [],
+  "rewards": [
+   "Exp +50"
+  ],
+  "next": [
+   "Main_UseGlider"
+  ],
+  "prev": [
+   "Main_CaptureSheepBall_Old"
+  ]
+ },
+ {
+  "id": "Main_UseGlider",
+  "slug": "safety-measures",
+  "name": "Safety Measures",
+  "kind": "Main Mission",
+  "description": "This island is full of dangers, and cliffs are one of them.\nOne wrong step could cost you more than just a few scrapes.\n\nUnlock the {Glider_Old} technology and craft it at the {WorkBench}.\nWith this tool in hand, even the highest drop becomes an easy-breezy descent.",
+  "objectives": [],
+  "rewards": [
+   "Exp +100"
+  ],
+  "next": [
+   "Main_Capture30Pal"
+  ],
+  "prev": [
+   "Main_CraftShield"
+  ]
+ },
+ {
+  "id": "Main_Capture30Pal",
+  "slug": "capture-any-30-pals.",
+  "name": "Capture any 30 Pals.",
+  "kind": "Main Mission",
+  "description": "This device includes a feature called the Palpedia, which collects and stores information on Pals.\nIt can hold data for up to 12 individuals per species.\n\nCapturing more Pals also rewards you with bonus EXP.\nStart by catching 30 different Pals.\n\nWith a wide range of abilities on your team, you'll be ready to take on even more powerful foes.",
+  "objectives": [],
+  "rewards": [
+   "Exp +400"
+  ],
+  "next": [
+   "Main_Craft_PalGear"
+  ],
+  "prev": [
+   "Main_UseGlider"
+  ]
+ },
+ {
+  "id": "Main_Craft_PalGear",
+  "slug": "partner-skills",
+  "name": "Partner Skills",
+  "kind": "Main Mission",
+  "description": "Each Pal has a unique Partner Skill with different effects depending on its species.\nSome can be equipped and controlled directly, while others can be ridden as mounts.\n\nFirst, unlock the {WorkBench_SkillUnlock} technology and set one up at your base.\nThen, unlock the {SkillUnlock_Kitsunebi} to craft it at your {WorkBench_SkillUnlock}.\n\nUnlike other items, Pal Gear is stored in the Key Items space next to your Inventory.",
+  "objectives": [
+   {
+    "text": "Foxparks' Harness 1"
+   }
+  ],
+  "rewards": [
+   "Exp +45"
+  ],
+  "next": [
+   "Main_DefeatWildBoss"
+  ],
+  "prev": [
+   "Main_Capture30Pal"
+  ]
+ },
+ {
+  "id": "Main_DefeatWildBoss",
+  "slug": "first-boss-battle",
+  "name": "First Boss Battle",
+  "kind": "Main Mission",
+  "description": "Powerful Pals have carved out their own territories across the Palpagos Islands.\nThey can be dangerous, but defeating them yields experience,\nand capturing them earns you formidable new allies.\n\nHow you deal with them is up to you.\nRumors whisper of a Pal called {targetpal} somewhere in these wilds.\n\nTrack it down. Whether you capture or defeat it is up to you.",
+  "objectives": [
+   {
+    "text": "Dancer on the Steppe Chillet"
+   },
+   {
+    "text": "Fort Ruins 174,-419",
+    "map": "Palpagos_Islands",
+    "x": 174,
+    "y": -419
+   }
+  ],
+  "rewards": [
+   "Exp +500"
+  ],
+  "next": [
+   "Main_CraftMealPouch"
+  ],
+  "prev": [
+   "Main_Craft_PalGear"
+  ]
+ },
+ {
+  "id": "Main_CraftMealPouch",
+  "slug": "hunger-is-the-greatest-foe",
+  "name": "Hunger is the Greatest Foe",
+  "kind": "Main Mission",
+  "description": "Hunger is your greatest enemy.\nNo matter the situation, never forget to eat.\n\nBoth you and your Pals can use {AutoMealPouch_Tier1}s to help you eat while on the move.\nSmall conveniences like these can make a big difference in both exploration and battle.\n\nLike Pal Gear, the {AutoMealPouch_Tier1} is stored in the Key Items space next to your inventory.",
+  "objectives": [
+   {
+    "text": "Small Feed Bag 1"
+   }
+  ],
+  "rewards": [
+   "Grilled Lamball 10",
+   "Chikipi Sauté 10"
+  ],
+  "next": [
+   "Main_DefeatDungeonBoss"
+  ],
+  "prev": [
+   "Main_DefeatWildBoss"
+  ]
+ },
+ {
+  "id": "Main_DefeatDungeonBoss",
+  "slug": "sealed-pals",
+  "name": "Sealed Pals",
+  "kind": "Main Mission",
+  "description": "These islands are home to a Pal known as {targetpal}.\nThough fierce, challenging it might be the perfect chance\nto put your combat skills to the test.\n\nFind it, and try capturing or defeating it.",
+  "objectives": [
+   {
+    "text": "Pioneer of the Frozen Sea Penking"
+   },
+   {
+    "text": "Sealed Realm of the Frozen Wings 114,-352",
+    "map": "Palpagos_Islands",
+    "x": 114,
+    "y": -352
+   }
+  ],
+  "rewards": [
+   "Exp +1,000"
+  ],
+  "next": [
+   "Main_BuildHatchingMachine"
+  ],
+  "prev": [
+   "Main_CraftMealPouch"
+  ]
+ },
+ {
+  "id": "Main_BuildHatchingMachine",
+  "slug": "pal-eggs",
+  "name": "Pal Eggs",
+  "kind": "Main Mission",
+  "description": "Pals hatch from Pal Eggs.\nYou can find these eggs all over the islands, so keep a sharp eye out while exploring.\n\nRaising Pals from Pal Eggs can lead you to rare and unique new allies.\nWho knows? One day, you might just hatch the perfect Pal.\n\nStart by unlocking the {HatchingPalEgg} technology and setting one up at your base.\nOnce you place an egg inside, you'll need to wait a while for it to hatch.",
+  "objectives": [],
+  "rewards": [
+   "Exp +550"
+  ],
+  "next": [
+   "Main_BaseCampLevel"
+  ],
+  "prev": [
+   "Main_DefeatDungeonBoss"
+  ]
+ },
+ {
+  "id": "Main_BaseCampLevel",
+  "slug": "a-cozy-base",
+  "name": "A Cozy Base",
+  "kind": "Main Mission",
+  "description": "Expanding your base is essential if you want your Pals to work efficiently.\nRaise your base to level 7 to create a more comfortable space for them.\nWith the right setup, you'll be strong enough to take on that tower when the time comes.",
+  "objectives": [],
+  "rewards": [
+   "Exp +1,000"
+  ],
+  "next": [
+   "Main_DefeatGrassBoss"
+  ],
+  "prev": [
+   "Main_BuildHatchingMachine"
+  ]
+ },
+ {
+  "id": "Main_DefeatGrassBoss",
+  "slug": "the-girl-and-the-tower",
+  "name": "The Girl and the Tower",
+  "kind": "Main Mission",
+  "description": "The time has come for you to challenge the tower of Zoe Rayne.\nThough she still doesn't fully understand the meaning of\nher role as its guardian, she has dutifully accepted it all the same.\n\nClaim victory in battle, and you may yet glimpse what lies beyond this tower.",
+  "objectives": [
+   {
+    "text": "Rayne Syndicate Tower Entrance 111,-430",
+    "map": "Palpagos_Islands",
+    "x": 111,
+    "y": -430
+   },
+   {
+    "text": "Tower of the Rayne Syndicate"
+   }
+  ],
+  "rewards": [
+   "Exp +1,200"
+  ],
+  "next": [
+   "Main_ReturnSmallVillage"
+  ],
+  "prev": [
+   "Main_BaseCampLevel"
+  ]
+ },
+ {
+  "id": "Main_CaptureDeerGround",
+  "slug": "wildlife-sanctuaries",
+  "name": "Wildlife Sanctuaries",
+  "kind": "Main Mission",
+  "description": "Around the edges of the Palpagos Islands lie restricted zones known as Wildlife Sanctuaries,\nhome to Pals with traits unlike any others.\n\nAmong them, a Pal known as {targetpal} is said to possess extraordinary power.\nCapturing one could unlock entirely new possibilities.",
+  "objectives": [
+   {
+    "text": "Eikthyrdeer Terra"
+   },
+   {
+    "text": "Sea Breeze Archipelago - Castaway Beach 87,-725",
+    "map": "Palpagos_Islands",
+    "x": 87,
+    "y": -725
+   }
+  ],
+  "rewards": [
+   "Exp +1,500"
+  ],
+  "next": [
+   "Main_DefeatForestBoss"
+  ],
+  "prev": []
+ },
+ {
+  "id": "Main_DefeatForestBoss",
+  "slug": "thou-shalt-not-harm-pals",
+  "name": "Thou Shalt Not Harm Pals",
+  "kind": "Main Mission",
+  "description": "You took down Zoe Rayne, and obtained the Key Sphere of Envy.\nYour next objective is the Free Pal Alliance Tower.",
+  "objectives": [
+   {
+    "text": "Sealed Realm of the Myriad Flames -223,-138",
+    "map": "Palpagos_Islands",
+    "x": -223,
+    "y": -138
+   },
+   {
+    "text": "Investigator's Fork -196,-234",
+    "map": "Palpagos_Islands",
+    "x": -196,
+    "y": -234
+   },
+   {
+    "text": "Sealed Realm of the Myriad Flames -223,-138",
+    "map": "Palpagos_Islands",
+    "x": -223,
+    "y": -138
+   },
+   {
+    "text": "Cinnamoth Forest -123,-247",
+    "map": "Palpagos_Islands",
+    "x": -123,
+    "y": -247
+   },
+   {
+    "text": "Sealed Realm of the Myriad Flames -223,-138",
+    "map": "Palpagos_Islands",
+    "x": -223,
+    "y": -138
+   },
+   {
+    "text": "Free Pal Alliance Tower Entrance 36,-310",
+    "map": "Palpagos_Islands",
+    "x": 36,
+    "y": -310
+   },
+   {
+    "text": "Tower of the Free Pal Alliance"
+   },
+   {
+    "text": "Sealed Realm of the Myriad Flames -223,-138",
+    "map": "Palpagos_Islands",
+    "x": -223,
+    "y": -138
+   }
+  ],
+  "rewards": [
+   "Exp +1,155"
+  ],
+  "next": [
+   "Main_DefeatVolcanoBoss"
+  ],
+  "prev": [
+   "Main_CaptureDeerGround",
+   "Main_TalkGrassBoss"
+  ]
+ },
+ {
+  "id": "Main_DefeatVolcanoBoss",
+  "slug": "flawless-victory-fixation",
+  "name": "Flawless Victory Fixation",
+  "kind": "Main Mission",
+  "description": "You took down Lily Everhart, and obtained the Key Sphere of Pride.\nYour next objective is the Eternal Pyre Tower.",
+  "objectives": [
+   {
+    "text": "Fisherman's Point -484,-750",
+    "map": "Palpagos_Islands",
+    "x": -484,
+    "y": -750
+   },
+   {
+    "text": "Fisherman's Point -475,-749",
+    "map": "Palpagos_Islands",
+    "x": -475,
+    "y": -749
+   },
+   {
+    "text": "Mount Obsidian - Anubis Statue -539,-673",
+    "map": "Palpagos_Islands",
+    "x": -539,
+    "y": -673
+   },
+   {
+    "text": "Fisherman's Point -484,-750",
+    "map": "Palpagos_Islands",
+    "x": -484,
+    "y": -750
+   },
+   {
+    "text": "Eternal Pyre Tower Entrance -589,-518",
+    "map": "Palpagos_Islands",
+    "x": -589,
+    "y": -518
+   },
+   {
+    "text": "Tower of the Brothers of the Eternal Pyre"
+   },
+   {
+    "text": "Fisherman's Point -484,-750",
+    "map": "Palpagos_Islands",
+    "x": -484,
+    "y": -750
+   }
+  ],
+  "rewards": [
+   "Exp +3,345"
+  ],
+  "next": [
+   "Main_DefeatDesertBoss"
+  ],
+  "prev": [
+   "Main_DefeatForestBoss"
+  ]
+ },
+ {
+  "id": "Main_DefeatDesertBoss",
+  "slug": "ruler-of-the-sands",
+  "name": "Ruler of the Sands",
+  "kind": "Main Mission",
+  "description": "You took down Axel Travers, and obtained the Key Sphere of Sloth.\nYour next objective is the PIDF Tower.",
+  "objectives": [
+   {
+    "text": "Duneshelter 350,350",
+    "map": "Palpagos_Islands",
+    "x": 350,
+    "y": 350
+   },
+   {
+    "text": "Duneshelter 342,358",
+    "map": "Palpagos_Islands",
+    "x": 342,
+    "y": 358
+   },
+   {
+    "text": "Duneshelter 350,350",
+    "map": "Palpagos_Islands",
+    "x": 350,
+    "y": 350
+   },
+   {
+    "text": "PIDF Tower Entrance 498,344",
+    "map": "Palpagos_Islands",
+    "x": 498,
+    "y": 344
+   },
+   {
+    "text": "PIDF Tower Entrance 529,332",
+    "map": "Palpagos_Islands",
+    "x": 529,
+    "y": 332
+   },
+   {
+    "text": "Sandstone Plateau Watchtower 343,409",
+    "map": "Palpagos_Islands",
+    "x": 343,
+    "y": 409
+   },
+   {
+    "text": "Duneshelter 350,350",
+    "map": "Palpagos_Islands",
+    "x": 350,
+    "y": 350
+   },
+   {
+    "text": "PIDF Tower Entrance 557,335",
+    "map": "Palpagos_Islands",
+    "x": 557,
+    "y": 335
+   },
+   {
+    "text": "Tower of the PIDF"
+   },
+   {
+    "text": "Duneshelter 350,350",
+    "map": "Palpagos_Islands",
+    "x": 350,
+    "y": 350
+   }
+  ],
+  "rewards": [
+   "Exp +7,302"
+  ],
+  "next": [
+   "Main_DefeatSnowyMountainBoss"
+  ],
+  "prev": [
+   "Main_DefeatVolcanoBoss"
+  ]
+ },
+ {
+  "id": "Main_DefeatSnowyMountainBoss",
+  "slug": "interspecies-experiments",
+  "name": "Interspecies Experiments",
+  "kind": "Main Mission",
+  "description": "You took down Marcus Dryden, and obtained the Key Sphere of Greed.\nYour next objective is the PAL Genetic Research Unit Tower.",
+  "objectives": [
+   {
+    "text": "Unthawable Lake -100,303",
+    "map": "Palpagos_Islands",
+    "x": -100,
+    "y": 303
+   },
+   {
+    "text": "PAL Genetic Research Unit Executioner"
+   },
+   {
+    "text": "PAL Genetic Research Unit Executioner"
+   },
+   {
+    "text": "Unthawable Lake -135,282",
+    "map": "Palpagos_Islands",
+    "x": -135,
+    "y": 282
+   },
+   {
+    "text": "Unthawable Lake -135,282",
+    "map": "Palpagos_Islands",
+    "x": -135,
+    "y": 282
+   },
+   {
+    "text": "Unthawable Lake -100,303",
+    "map": "Palpagos_Islands",
+    "x": -100,
+    "y": 303
+   },
+   {
+    "text": "Icy Weasel Hill Watchtower -107,166",
+    "map": "Palpagos_Islands",
+    "x": -107,
+    "y": 166
+   },
+   {
+    "text": "Unthawable Lake -100,303",
+    "map": "Palpagos_Islands",
+    "x": -100,
+    "y": 303
+   },
+   {
+    "text": "Pristine Snow Field -273,301",
+    "map": "Palpagos_Islands",
+    "x": -273,
+    "y": 301
+   },
+   {
+    "text": "Unthawable Lake -100,303",
+    "map": "Palpagos_Islands",
+    "x": -100,
+    "y": 303
+   },
+   {
+    "text": "PAL Genetic Research Unit Tower Entrance -148,447",
+    "map": "Palpagos_Islands",
+    "x": -148,
+    "y": 447
+   },
+   {
+    "text": "Tower of the PAL Genetic Research Unit"
+   },
+   {
+    "text": "Unthawable Lake -100,303",
+    "map": "Palpagos_Islands",
+    "x": -100,
+    "y": 303
+   }
+  ],
+  "rewards": [
+   "Exp +15,210"
+  ],
+  "next": [
+   "Main_DefeatSakurajimaBoss"
+  ],
+  "prev": [
+   "Main_DefeatDesertBoss"
+  ]
+ },
+ {
+  "id": "Main_DefeatSakurajimaBoss",
+  "slug": "a-fine-night-for-a-drink",
+  "name": "A Fine Night for a Drink",
+  "kind": "Main Mission",
+  "description": "You took down Victor Ashford, and obtained the Key Sphere of Gluttony.\nYour next objective is the Moonflower Tower.",
+  "objectives": [
+   {
+    "text": "Moonflower Tower Entrance -610,233",
+    "map": "Palpagos_Islands",
+    "x": -610,
+    "y": 233
+   },
+   {
+    "text": "Moonflower Genin"
+   },
+   {
+    "text": "Moonflower Jonin"
+   },
+   {
+    "text": "Secluded Cemetery -646,251",
+    "map": "Palpagos_Islands",
+    "x": -646,
+    "y": 251
+   },
+   {
+    "text": "Secluded Cemetery -646,251",
+    "map": "Palpagos_Islands",
+    "x": -646,
+    "y": 251
+   },
+   {
+    "text": "Moonflower Tower Entrance -610,233",
+    "map": "Palpagos_Islands",
+    "x": -610,
+    "y": 233
+   },
+   {
+    "text": "Moonflower Tower Entrance -633,224",
+    "map": "Palpagos_Islands",
+    "x": -633,
+    "y": 224
+   },
+   {
+    "text": "Moonflower Tower Entrance -610,233",
+    "map": "Palpagos_Islands",
+    "x": -610,
+    "y": 233
+   },
+   {
+    "text": "Moonflower Tower Entrance -597,206",
+    "map": "Palpagos_Islands",
+    "x": -597,
+    "y": 206
+   },
+   {
+    "text": "Moonflower Tower"
+   },
+   {
+    "text": "Moonflower Tower Entrance -610,233",
+    "map": "Palpagos_Islands",
+    "x": -610,
+    "y": 233
+   }
+  ],
+  "rewards": [
+   "Exp +21,294"
+  ],
+  "next": [
+   "Main_DefeatVikingBoss"
+  ],
+  "prev": [
+   "Main_DefeatSnowyMountainBoss"
+  ]
+ },
+ {
+  "id": "Main_DefeatVikingBoss",
+  "slug": "bearer-of-all-burdens",
+  "name": "Bearer of All Burdens",
+  "kind": "Main Mission",
+  "description": "You took down Saya Kurosaki, and obtained the Key Sphere of Lust.\nYour next objective is the Feybreak Tower.",
+  "objectives": [
+   {
+    "text": "Shield Dragon Tunnel -1023,-930",
+    "map": "Palpagos_Islands",
+    "x": -1023,
+    "y": -930
+   },
+   {
+    "text": "Hidden Passage to the Oculus Gate -1034,-1260",
+    "map": "Palpagos_Islands",
+    "x": -1034,
+    "y": -1260
+   },
+   {
+    "text": "Shield Dragon Tunnel -1023,-930",
+    "map": "Palpagos_Islands",
+    "x": -1023,
+    "y": -930
+   },
+   {
+    "text": "Hidden Passage to the Oculus Gate -1079,-1319",
+    "map": "Palpagos_Islands",
+    "x": -1079,
+    "y": -1319
+   },
+   {
+    "text": "Shield Dragon Tunnel -1023,-930",
+    "map": "Palpagos_Islands",
+    "x": -1023,
+    "y": -930
+   },
+   {
+    "text": "Feybreak Tower Entrance -1294,-1669",
+    "map": "Palpagos_Islands",
+    "x": -1294,
+    "y": -1669
+   },
+   {
+    "text": "Feybreak Tower"
+   },
+   {
+    "text": "Shield Dragon Tunnel -1023,-930",
+    "map": "Palpagos_Islands",
+    "x": -1023,
+    "y": -930
+   }
+  ],
+  "rewards": [
+   "Exp +28,899"
+  ],
+  "next": [
+   "Main_DefeatSkyIslandBoss"
+  ],
+  "prev": [
+   "Main_DefeatSakurajimaBoss"
+  ]
+ },
+ {
+  "id": "Main_TutorialStart",
+  "slug": "the-first-islander",
+  "name": "The First Islander",
+  "kind": "Main Mission",
+  "description": "You wake up on a beach, but your memory is still fuzzy.\n\nWho are you, and what are you doing here?\n...Where is this place?\nAs you start looking for clues,\nyou spot a tiny figure far off in the distance.",
+  "objectives": [
+   {
+    "text": "Hill of Beginnings 241,-509",
+    "map": "Palpagos_Islands",
+    "x": 241,
+    "y": -509
+   }
+  ],
+  "rewards": [
+   "Exp +6"
+  ],
+  "next": [
+   "Main_OpenSurvivalGuide"
+  ],
+  "prev": [
+   "Main_UnlockFastTravel"
+  ]
+ },
+ {
+  "id": "Main_BuildWorkbench",
+  "slug": "set-up-a-workbench",
+  "name": "Set Up a Workbench",
+  "kind": "Main Mission",
+  "description": "Harvest Wood & Build a Workbench\n\nThese islands are rich in natural resources such as Wood and Stone.\nTo conserve our supplies and continue the survey for as long as possible,\nwe'll need to take advantage of them.\n\nFirst, Wood.\nThere are two ways to gather it:\neither collect the wood already on the ground,\nor strike at a nearby tree.\n\nOnce you've got those materials in hand,\nfind a safe space and set up a Workbench.",
+  "objectives": [
+   {
+    "text": "Wood 1"
+   }
+  ],
+  "rewards": [
+   "Exp +6"
+  ],
+  "next": [
+   "Main_CraftTools"
+  ],
+  "prev": [
+   "Main_OpenSurvivalGuide",
+   "Main_GainStatus"
+  ]
+ },
+ {
+  "id": "Main_StatusUp",
+  "slug": "enhance-stats",
+  "name": "Enhance Stats",
+  "kind": "Main Mission",
+  "description": "Improving Your Stats\n\nGaining EXP and honing your skills are the keys to overcoming the challenges ahead.\nOnce you level up, open your inventory to enhance your stats.\nImproved abilities are crucial to streamlining your activities here.",
+  "objectives": [],
+  "rewards": [
+   "Exp +15"
+  ],
+  "next": [
+   "Main_CatchPal"
+  ],
+  "prev": [
+   "Main_CraftTools"
+  ]
+ },
+ {
+  "id": "Main_CatchPal",
+  "slug": "catching-a-pal",
+  "name": "Catching a Pal",
+  "kind": "Main Mission",
+  "description": "Making {PalSphere}s and Capturing Pals\n\nAs you may have noticed, this island is home to a variety of strange creatures.\nKnown as |Pals,| these intelligent creatures come in a wide range of shapes and sizes.\nOf course, our activities here would benefit greatly if we were able to harness their abilities.\n\nPals can be captured by a |{PalSphere}|.\nWhile the exact principles are still unclear,\nit's possible to tame any Pal by catching it with a Sphere.\n\nFirst, check the Technology screen for details,\nthen obtain the {Pal_crystal_S} required for crafting.\nThis strange ore glows with a pale blue light, and is often found near sources of water.\n\nOnce you finish building your Spheres on a Workbench, you're set to go.\n\nMake sure to wear down the Pal you want to capture.\nLowering their Health will increase the chances of a successful capture.\n\nThat being said, most Pals will resist capture, and will fight back.\nStart by focusing on smaller, weaker Pals until you get better equipment.",
+  "objectives": [
+   {
+    "text": "Paldium Fragment 1"
+   },
+   {
+    "text": "Pal Sphere 1"
+   }
+  ],
+  "rewards": [
+   "Exp +15"
+  ],
+  "next": [
+   "Main_WorkPal"
+  ],
+  "prev": [
+   "Main_StatusUp"
+  ]
+ },
+ {
+  "id": "Main_WorkPal",
+  "slug": "putting-pals-to-work",
+  "name": "Putting Pals to Work",
+  "kind": "Main Mission",
+  "description": "Pal Labor\n\nInteracting with a Palbox allows you to manage and utilize your Pals efficiently.\n\nFirst, check the Technology screen for details,\nthen build a Palbox in a safe location.\n\nThe Palbox can be used to store Pals you have on hand,\nor summon them to the box's location.\nPals summoned from the Palbox can only move within a certain radius of the Palbox.\nAs such, the location of your Palbox inevitably becomes the centerpoint of your base.\n\nPals summoned from a Palbox will find work to occupy themselves with,\nbased on their own unique traits.\nYou can increase the efficiency of your operations by capturing and utilizing more Pals.",
+  "objectives": [],
+  "rewards": [
+   "Exp +15"
+  ],
+  "next": [
+   "Main_EatFood"
+  ],
+  "prev": [
+   "Main_CatchPal"
+  ]
+ },
+ {
+  "id": "Main_EatFood",
+  "slug": "filling-your-belly",
+  "name": "Filling Your Belly",
+  "kind": "Main Mission",
+  "description": "Obtaining Food\n\nLong-term operations also require a reliable source of food.\nLuckily, the {Berries} found in various locations\ncan be consumed raw.\n\nSome wild Pals are edible, too.\nAs heart-wrenching as it may be to butcher such adorable creatures...\nWe must do whatever is necessary to survive.",
+  "objectives": [],
+  "rewards": [
+   "Exp +15"
+  ],
+  "next": [
+   "Main_CaptureSheepBall"
+  ],
+  "prev": [
+   "Main_WorkPal"
+  ]
+ },
+ {
+  "id": "Main_CaptureSheepBall",
+  "slug": "the-weakest-pal",
+  "name": "The Weakest Pal",
+  "kind": "Main Mission",
+  "description": "Utilizing {SheepBall}s\n\n{SheepBall}s lack any real sort of offensive power, making them easy to catch.\nMoreover, they are dexterous enough to handle a wide variety of tasks,\nmaking them an excellent choice for the early stages of any base expansion.\n\nThey can also provide you with {Wool} or {Meat_SheepBall},\nwhich are both necessary for survival.\nStart by capturing your own small flock, then watch your base begin to flourish.",
+  "objectives": [
+   {
+    "text": "Lamball"
+   }
+  ],
+  "rewards": [
+   "Exp +45"
+  ],
+  "next": [
+   "Main_PrepareEquipment"
+  ],
+  "prev": [
+   "Main_EatFood"
+  ]
+ },
+ {
+  "id": "Main_PrepareEquipment",
+  "slug": "gearing-up",
+  "name": "Gearing Up",
+  "kind": "Main Mission",
+  "description": "Crafting Equipment\n\nFirst, use the Wool obtained from a {SheepBall} to craft {Cloth} at a Workbench, then use that to craft a set of {ClothArmor}.\n\nNext, put craft a {Shield_01} which utilizes the self-restorative properties of Paldium.\n\nFinally, craft a {Glider_Old}, which will make it much easier to navigate the difficult terrain.\n\nEquipping these will make your activities here much easier.",
+  "objectives": [],
+  "rewards": [
+   "Exp +45"
+  ],
+  "next": [
+   "Main_SmallVillage"
+  ],
+  "prev": [
+   "Main_CaptureSheepBall"
+  ]
+ },
+ {
+  "id": "Main_BeginAdventure",
+  "slug": "the-adventure-begins",
+  "name": "The Adventure Begins",
+  "kind": "Main Mission",
+  "description": "You've finished all the tasks displayed on the tablet, putting the information to practical use.\nReport back to the woman who gave you the instructions.",
+  "objectives": [
+   {
+    "text": "Hill of Beginnings 241,-509",
+    "map": "Palpagos_Islands",
+    "x": 241,
+    "y": -509
+   }
+  ],
+  "rewards": [
+   "Exp +45"
+  ],
+  "next": [
+   "Main_SmallVillage"
+  ],
+  "prev": []
+ },
+ {
+  "id": "Main_SmallVillage",
+  "slug": "small-settlement",
+  "name": "Small Settlement",
+  "kind": "Main Mission",
+  "description": "You've finished all the tasks displayed on your device.\n\nAccording to the lone surviving surveyor,\nthere's a settlement close to the Rayne Syndicate Tower.\n\nOnce you find it, try talking to their chief to learn more.",
+  "objectives": [
+   {
+    "text": "Small Settlement 76,-476",
+    "map": "Palpagos_Islands",
+    "x": 76,
+    "y": -476
+   }
+  ],
+  "rewards": [
+   "Exp +66"
+  ],
+  "next": [
+   "Main_CraftPalGear"
+  ],
+  "prev": [
+   "Main_PrepareEquipment",
+   "Main_BeginAdventure"
+  ]
+ },
+ {
+  "id": "Main_CraftPalGear",
+  "slug": "crafting-pal-gear",
+  "name": "Crafting Pal Gear",
+  "kind": "Main Mission",
+  "description": "The settlement's chief has informed you that if you want to learn more about the history of the Palpagos Islands,\nthen you ought to pay a visit to Zoe, the only daughter of the boss of the Rayne Syndicate.\n\nBefore you do that however,\nthe chief thinks that capturing a {Kitsunebi} and creating some Pal Gear\nfor it would go a long way to ensuring a successful visit to the tower.",
+  "objectives": [
+   {
+    "text": "Foxparks"
+   },
+   {
+    "text": "Foxparks' Harness 1"
+   },
+   {
+    "text": "Small Settlement 76,-476",
+    "map": "Palpagos_Islands",
+    "x": 76,
+    "y": -476
+   }
+  ],
+  "rewards": [
+   "Exp +99"
+  ],
+  "next": [
+   "Main_RayneSyndicate"
+  ],
+  "prev": [
+   "Main_SmallVillage"
+  ]
+ },
+ {
+  "id": "Main_RayneSyndicate",
+  "slug": "the-rayne-syndicate",
+  "name": "The Rayne Syndicate",
+  "kind": "Main Mission",
+  "description": "Now that you’re adequately prepared,\nit’s time to meet Zoe at the Rayne Syndicate Tower.",
+  "objectives": [
+   {
+    "text": "Rayne Syndicate Tower Entrance 111,-430",
+    "map": "Palpagos_Islands",
+    "x": 111,
+    "y": -430
+   },
+   {
+    "text": "Rayne Syndicate Tower Entrance 111,-430",
+    "map": "Palpagos_Islands",
+    "x": 111,
+    "y": -430
+   },
+   {
+    "text": "Tower of the Rayne Syndicate"
+   }
+  ],
+  "rewards": [
+   "Exp +198"
+  ],
+  "next": [
+   "Main_ReturnSmallVillage"
+  ],
+  "prev": [
+   "Main_CraftPalGear"
+  ]
+ },
+ {
+  "id": "Main_ReturnSmallVillage",
+  "slug": "the-key-sphere",
+  "name": "The Key Sphere",
+  "kind": "Main Mission",
+  "description": "You defeated the young woman you believe to be Zoe,\nand obtained a mysterious object resembling a Pal Sphere left lying nearby.\n\nGo back to the Small Settlement and ask the Chief about it.",
+  "objectives": [
+   {
+    "text": "Small Settlement 76,-476",
+    "map": "Palpagos_Islands",
+    "x": 76,
+    "y": -476
+   }
+  ],
+  "rewards": [
+   "Exp +288"
+  ],
+  "next": [
+   "Main_TalkGrassBoss"
+  ],
+  "prev": [
+   "Main_DefeatGrassBoss",
+   "Main_RayneSyndicate"
+  ]
+ },
+ {
+  "id": "Main_TalkGrassBoss",
+  "slug": "zoe-rayne",
+  "name": "Zoe Rayne",
+  "kind": "Main Mission",
+  "description": "According to the Chief, you should trying asking Zoe for more information.\nMake your way back to the Rayne Syndicate Tower.",
+  "objectives": [
+   {
+    "text": "Rayne Syndicate Tower Entrance 112,-428",
+    "map": "Palpagos_Islands",
+    "x": 112,
+    "y": -428
+   }
+  ],
+  "rewards": [
+   "Exp +288"
+  ],
+  "next": [
+   "Main_DefeatForestBoss",
+   "Main_CollectKeySpheres"
+  ],
+  "prev": [
+   "Main_ReturnSmallVillage"
+  ]
+ },
+ {
+  "id": "Main_CollectKeySpheres",
+  "slug": "gathering-the-key-spheres",
+  "name": "Gathering the Key Spheres",
+  "kind": "Main Mission",
+  "description": "According to Zoe, there are eight towers on the islands,\neach with a Key Sphere sealed inside.\n\nCollect them all to try and solve their mystery.",
+  "objectives": [
+   {
+    "text": "Key Sphere of Envy 1"
+   },
+   {
+    "text": "Key Sphere of Pride 1"
+   },
+   {
+    "text": "Key Sphere of Greed 1"
+   },
+   {
+    "text": "Key Sphere of Sloth 1"
+   },
+   {
+    "text": "Key Sphere of Gluttony 1"
+   },
+   {
+    "text": "Key Sphere of Lust 1"
+   },
+   {
+    "text": "Key Sphere of Wrath 1"
+   },
+   {
+    "text": "Key Sphere of Original Sin 1"
+   }
+  ],
+  "rewards": [
+   "Exp +39,546"
+  ],
+  "next": [],
+  "prev": [
+   "Main_TalkGrassBoss"
+  ]
+ },
+ {
+  "id": "Main_TalkSkyBoss",
+  "slug": "the-sunreacher",
+  "name": "The Sunreacher",
+  "kind": "Main Mission",
+  "description": "You may have beaten Auri, but it seems as if she wasn't putting her all into the fight.\n\nSomething about that makes her feel different from the other tower leaders.\nTalk with her and find out why.",
+  "objectives": [
+   {
+    "text": "Azure Covenant Tower Entrance -425,-1430",
+    "map": "Palpagos_Islands",
+    "x": -425,
+    "y": -1430
+   }
+  ],
+  "rewards": [
+   "Exp +39,546"
+  ],
+  "next": [
+   "Main_TalkSkyBossAgain"
+  ],
+  "prev": [
+   "Main_DefeatSkyIslandBoss"
+  ]
+ },
+ {
+  "id": "Main_TalkSkyBossAgain",
+  "slug": "the-calamity",
+  "name": "The Calamity",
+  "kind": "Main Mission",
+  "description": "Auri is ready to provide you with information about the World Tree.\n\nShe says you’re in for a long talk,\nso make sure you have plenty of time before you talk with her again.",
+  "objectives": [
+   {
+    "text": "Azure Covenant Tower Entrance -425,-1430",
+    "map": "Palpagos_Islands",
+    "x": -425,
+    "y": -1430
+   }
+  ],
+  "rewards": [
+   "Exp +39,546"
+  ],
+  "next": [
+   "Main_DefeatKingWhale"
+  ],
+  "prev": [
+   "Main_TalkSkyBoss"
+  ]
+ },
+ {
+  "id": "Main_DefeatKingWhale",
+  "slug": "<charactername-id=|kingwhale|/>",
+  "name": "Panthalus",
+  "kind": "Main Mission",
+  "description": "You’ll need {KingWhale}' help to make your way into the World Tree.\nSeek it out and prove your strength to it.",
+  "objectives": [
+   {
+    "text": "Deserted Islet -174,34",
+    "map": "Palpagos_Islands",
+    "x": -174,
+    "y": 34
+   },
+   {
+    "text": "Deserted Islet -173,34",
+    "map": "Palpagos_Islands",
+    "x": -173,
+    "y": 34
+   },
+   {
+    "text": "Marine Echobone 1"
+   },
+   {
+    "text": "Silent Echobone 1"
+   },
+   {
+    "text": "Seafoam Echobone 1"
+   },
+   {
+    "text": "Tidewind Echobone 1"
+   },
+   {
+    "text": "Small Settlement 124,-524",
+    "map": "Palpagos_Islands",
+    "x": 124,
+    "y": -524
+   },
+   {
+    "text": "Echoing Flute 1"
+   },
+   {
+    "text": "Deserted Islet -173,34",
+    "map": "Palpagos_Islands",
+    "x": -173,
+    "y": 34
+   },
+   {
+    "text": "Deserted Islet -174,34",
+    "map": "Palpagos_Islands",
+    "x": -174,
+    "y": 34
+   },
+   {
+    "text": "Deserted Islet -174,34",
+    "map": "Palpagos_Islands",
+    "x": -174,
+    "y": 34
+   },
+   {
+    "text": "？？？"
+   },
+   {
+    "text": "Deserted Islet -173,34",
+    "map": "Palpagos_Islands",
+    "x": -173,
+    "y": 34
+   }
+  ],
+  "rewards": [
+   "Exp +63,882"
+  ],
+  "next": [
+   "Main_ReachWorldTree"
+  ],
+  "prev": [
+   "Main_TalkSkyBossAgain"
+  ]
+ },
+ {
+  "id": "Main_ReachWorldTree",
+  "slug": "to-the-world-tree",
+  "name": "To the World Tree",
+  "kind": "Main Mission",
+  "description": "You’ve proven your strength to {KingWhale},\nand it’s agreed to help you break through the barrier.\n\nHead to the World Tree and find a way inside.",
+  "objectives": [
+   {
+    "text": "Foot of the World Tree -836,711",
+    "map": "Palpagos_Islands",
+    "x": -836,
+    "y": 711
+   }
+  ],
+  "rewards": [
+   "Exp +63,882"
+  ],
+  "next": [
+   "Main_TalkWorldTreeNPC"
+  ],
+  "prev": [
+   "Main_DefeatKingWhale"
+  ]
+ },
+ {
+  "id": "Main_TalkWorldTreeNPC",
+  "slug": "sin",
+  "name": "Sin",
+  "kind": "Main Mission",
+  "description": "You’ve at last set foot within the World Tree.\nIts interior is filled with a mystical atmostphere, and yet you still feel a sense of unease.\n\nAfter looking around for a bit, you see someone.",
+  "objectives": [
+   {
+    "text": "Whimsical Wisteria Grove 76,766",
+    "map": "The_World_Tree",
+    "x": 76,
+    "y": 766
+   }
+  ],
+  "rewards": [
+   "Exp +102,669"
+  ],
+  "next": [
+   "Main_WorldTreeAbyss"
+  ],
+  "prev": [
+   "Main_ReachWorldTree"
+  ]
+ },
+ {
+  "id": "Main_WorldTreeAbyss",
+  "slug": "the-sealed-calamity",
+  "name": "The Sealed Calamity",
+  "kind": "Main Mission",
+  "description": "The World Tree Guardian told you about the current state of the World Tree\nand the Calamity that sleeps at its core.\n\nThe moment of truth is nearly upon you.",
+  "objectives": [
+   {
+    "text": "Within the Seal -77,763",
+    "map": "The_World_Tree",
+    "x": -77,
+    "y": 763
+   },
+   {
+    "text": "Within the Seal -78,765",
+    "map": "The_World_Tree",
+    "x": -78,
+    "y": 765
+   },
+   {
+    "text": "Remnant Riverside 19,844",
+    "map": "The_World_Tree",
+    "x": 19,
+    "y": 844
+   },
+   {
+    "text": "Abandoned Laboratory -66,854",
+    "map": "The_World_Tree",
+    "x": -66,
+    "y": 854
+   },
+   {
+    "text": "Rotmist Root 26,861",
+    "map": "The_World_Tree",
+    "x": 26,
+    "y": 861
+   },
+   {
+    "text": "Rotmist Root"
+   },
+   {
+    "text": "Shinespore Root -62,692",
+    "map": "The_World_Tree",
+    "x": -62,
+    "y": 692
+   },
+   {
+    "text": "Shinespore Root"
+   },
+   {
+    "text": "Forbidden Laboratory -84,854",
+    "map": "The_World_Tree",
+    "x": -84,
+    "y": 854
+   },
+   {
+    "text": "Forbidden Laboratory"
+   },
+   {
+    "text": "Within the Seal -78,763",
+    "map": "The_World_Tree",
+    "x": -78,
+    "y": 763
+   },
+   {
+    "text": "Within the Seal -81,760",
+    "map": "The_World_Tree",
+    "x": -81,
+    "y": 760
+   },
+   {
+    "text": "Within the Seal -82,759",
+    "map": "The_World_Tree",
+    "x": -82,
+    "y": 759
+   }
+  ],
+  "rewards": [
+   "Exp +102,669"
+  ],
+  "next": [],
+  "prev": [
+   "Main_TalkWorldTreeNPC"
+  ]
+ },
+ {
+  "id": "Main_DefeatWorldTreeDragon",
+  "slug": "awakening",
+  "name": "Awakening",
+  "kind": "Main Mission",
+  "description": "The white dragon of the Calamity and its master have awakened from their eternal slumber.\nNo words are exchanged.\n\nThe only thing left now is to end it all.",
+  "objectives": [
+   {
+    "text": "Within the Seal -82,759",
+    "map": "The_World_Tree",
+    "x": -82,
+    "y": 759
+   },
+   {
+    "text": "？？？"
+   }
+  ],
+  "rewards": [
+   "Exp +143,736"
+  ],
+  "next": [],
+  "prev": []
+ },
+ {
+  "id": "Test_UnlockAreaBarriers",
+  "slug": "test_unlockareabarriers",
+  "name": "Unlock Area Barriers",
+  "kind": "Main Mission",
+  "description": "",
+  "objectives": [],
+  "rewards": [],
+  "next": [],
+  "prev": []
+ },
+ {
+  "id": "Main_CraftTools",
+  "slug": "crafting-an-axe-and-a-pickaxe",
+  "name": "Crafting an Axe and a Pickaxe",
+  "kind": "Main Mission",
+  "description": "Craft an Axe and a Pickaxe:\n{Wood} and {Stone} are basic resources which are used for many things.\nYou can pick them up off the ground,\nor strike at trees or rocks with your bare hands to harvest them,\nbut... having the proper tools is essential to do so efficiently.\n\nStart by checking the recipes at a Workbench,\nthen gather the {Wood} and {Stone} required to make your very own\n{Pickaxe_Tier_00} and {Axe_Tier_00}.",
+  "objectives": [
+   {
+    "text": "Stone 1"
+   },
+   {
+    "text": "Stone Axe 1"
+   },
+   {
+    "text": "Stone Pickaxe 1"
+   }
+  ],
+  "rewards": [
+   "Exp +15"
+  ],
+  "next": [
+   "Main_StatusUp"
+  ],
+  "prev": [
+   "Main_BuildWorkbench"
+  ]
+ },
+ {
+  "id": "Main_DefeatSkyIslandBoss",
+  "slug": "hope-springs-eternal",
+  "name": "Hope Springs Eternal",
+  "kind": "Main Mission",
+  "description": "You took down Bjorn Seligsson, and obtained the Key Sphere of Wrath.\nYour next objective is the Azure Covenant Tower.",
+  "objectives": [
+   {
+    "text": "Sunreach Watchtower -284,-1467",
+    "map": "Palpagos_Islands",
+    "x": -284,
+    "y": -1467
+   },
+   {
+    "text": "Farcry Marsh -259,-1398",
+    "map": "Palpagos_Islands",
+    "x": -259,
+    "y": -1398
+   },
+   {
+    "text": "Enchanted Firmament -231,-1468",
+    "map": "Palpagos_Islands",
+    "x": -231,
+    "y": -1468
+   },
+   {
+    "text": "Waterlily Gorge -578,-1501",
+    "map": "Palpagos_Islands",
+    "x": -578,
+    "y": -1501
+   },
+   {
+    "text": "Crystalline Archipelago -437,-1522",
+    "map": "Palpagos_Islands",
+    "x": -437,
+    "y": -1522
+   },
+   {
+    "text": "The Azure Tapestry -475,-1347",
+    "map": "Palpagos_Islands",
+    "x": -475,
+    "y": -1347
+   },
+   {
+    "text": "The Azure Tapestry -549,-1318",
+    "map": "Palpagos_Islands",
+    "x": -549,
+    "y": -1318
+   },
+   {
+    "text": "Sunreach Watchtower -284,-1467",
+    "map": "Palpagos_Islands",
+    "x": -284,
+    "y": -1467
+   },
+   {
+    "text": "Azure Covenant Tower Entrance -423,-1426",
+    "map": "Palpagos_Islands",
+    "x": -423,
+    "y": -1426
+   },
+   {
+    "text": "PIDF Tower"
+   },
+   {
+    "text": "Sunreach Watchtower -284,-1467",
+    "map": "Palpagos_Islands",
+    "x": -284,
+    "y": -1467
+   }
+  ],
+  "rewards": [
+   "Exp +39,546"
+  ],
+  "next": [
+   "Main_TalkSkyBoss"
+  ],
+  "prev": [
+   "Main_DefeatVikingBoss"
+  ]
+ },
+ {
+  "id": "Main_DefeatWorldTreeMiddleBoss",
+  "slug": "path-to-the-abyss",
+  "name": "Path to the Abyss",
+  "kind": "Main Mission",
+  "description": "You listened to the recording left behind by a guardian\nstationed near the center of the World Tree.\n\nUse the attached coordinates to find further leads.",
+  "objectives": [
+   {
+    "text": "Within the Seal -78,765",
+    "map": "The_World_Tree",
+    "x": -78,
+    "y": 765
+   },
+   {
+    "text": "Within the Seal -78,763",
+    "map": "The_World_Tree",
+    "x": -78,
+    "y": 763
+   }
+  ],
+  "rewards": [
+   "Exp +102,669\n\n\nSub Mission /59\n\n\n$(document).ready(function () {\nfilterClick($('[name=filter]'));\n});\n\n\n\nReset"
+  ],
+  "next": [],
+  "prev": []
+ },
+ {
+  "id": "Sub_Farmer01",
+  "slug": "pals-blessing",
+  "name": "Pal's Blessing",
+  "kind": "Sub Mission",
+  "description": "If you've got a Pal that's good at watering, could you let me have it?\nSure, I could haul water from the river myself, but Pals just seem to have the magic touch—\nthe vegetables always grow bigger and happier with their help.\nPlease lend me a hand, will you?",
+  "objectives": [
+   {
+    "text": "Small Settlement 85,-485",
+    "map": "Palpagos_Islands",
+    "x": 85,
+    "y": -485
+   }
+  ],
+  "rewards": [
+   "Exp +240"
+  ],
+  "next": [],
+  "prev": []
+ },
+ {
+  "id": "Sub_Farmer02",
+  "slug": "hungry-for-recruits",
+  "name": "Hungry for Recruits",
+  "kind": "Sub Mission",
+  "description": "I've still got some cake left over... Would one of your Pals like a bite?\nIf they've got a big appetite, they might just jump for joy!\nSo, what do you say? It's scrumptious, I promise!",
+  "objectives": [
+   {
+    "text": "Glutton"
+   },
+   {
+    "text": "Bottomless Stomach"
+   },
+   {
+    "text": "Windswept Island Watchtower 12,-447",
+    "map": "Palpagos_Islands",
+    "x": 12,
+    "y": -447
+   }
+  ],
+  "rewards": [
+   "Exp +330"
+  ],
+  "next": [],
+  "prev": []
+ },
+ {
+  "id": "Sub_Farmer03",
+  "slug": "a-special-dish",
+  "name": "A Special Dish",
+  "kind": "Sub Mission",
+  "description": "Go to the entrance of the nearby settlement\nand find someone who looks like they know what they're doing!\n\nPlease make sure it gets delivered, all right?\nAnd once you're done, I'll be waiting right here with a thank-you gift!",
+  "objectives": [
+   {
+    "text": "Deliver the Farmer's Special Dish to a reliable-looking PIDF officer, then speak to the Farmer."
+   },
+   {
+    "text": "Farmer's Special Dish 1"
+   },
+   {
+    "text": "Small Settlement 80,-486",
+    "map": "Palpagos_Islands",
+    "x": 80,
+    "y": -486
+   },
+   {
+    "text": "Grassy Behemoth Hills 157,-466",
+    "map": "Palpagos_Islands",
+    "x": 157,
+    "y": -466
+   }
+  ],
+  "rewards": [
+   "Exp +280"
+  ],
+  "next": [],
+  "prev": []
+ },
+ {
+  "id": "Sub_Farmer04",
+  "slug": "medical-bills",
+  "name": "Medical Bills",
+  "kind": "Sub Mission",
+  "description": "I'm so close to being able to afford the treatment.\nI just need another 5,000 Gold Coins.\nPlease, I'm begging you...could you help me?",
+  "objectives": [
+   {
+    "text": "Give the Farmer 5,000 Gold Coins."
+   },
+   {
+    "text": "Gold Coin 5000"
+   },
+   {
+    "text": "Sealed Realm of the Frozen Wings 100,-364",
+    "map": "Palpagos_Islands",
+    "x": 100,
+    "y": -364
+   }
+  ],
+  "rewards": [
+   "Exp +530"
+  ],
+  "next": [],
+  "prev": []
+ },
+ {
+  "id": "Sub_Scholar01",
+  "slug": "prove-the-legend!",
+  "name": "Prove the Legend!",
+  "kind": "Sub Mission",
+  "description": "Now then, off you go! Find those legendary Pals!\n\nWe know there's at least one in each of these places:\nthe Astral Mountains to the north, the Desiccated Dunes to the east,\nand the far-off land known as Sunreach.\n\nClimb up that big rocky outcrop over there to get a clear view of the area.\nAnd remember... I'm counting on you!",
+  "objectives": [
+   {
+    "text": "Legend"
+   },
+   {
+    "text": "Free Pal Alliance Tower Entrance 60,-324",
+    "map": "Palpagos_Islands",
+    "x": 60,
+    "y": -324
+   }
+  ],
+  "rewards": [
+   "Exp +25,350"
+  ],
+  "next": [],
+  "prev": []
+ },
+ {
+  "id": "Sub_Scholar02",
+  "slug": "lock-in",
+  "name": "Lock In",
+  "kind": "Sub Mission",
+  "description": "Ugh, I have ZERO motivation to do...well, anything at all.\nAny luck finding me a Pal to boost my work efficiency?\nIdeally one that can scale steep mountains with ease. That'd get my butt in gear.",
+  "objectives": [
+   {
+    "text": "Predator of Snowy Peaks Cryolinx"
+   },
+   {
+    "text": "Cryolinx"
+   },
+   {
+    "text": "Motivational Leader"
+   },
+   {
+    "text": "No Man's Trail -45,88",
+    "map": "Palpagos_Islands",
+    "x": -45,
+    "y": 88
+   }
+  ],
+  "rewards": [
+   "Exp +12,170"
+  ],
+  "next": [],
+  "prev": []
+ },
+ {
+  "id": "Sub_Scholar03",
+  "slug": "give-a-fuack",
+  "name": "Give a Fuack",
+  "kind": "Sub Mission",
+  "description": "Well? I can't stand the suspense!\nDid you find me a Fuack?",
+  "objectives": [
+   {
+    "text": "Rowdy Wave Ripper Fuack"
+   },
+   {
+    "text": "Fuack"
+   },
+   {
+    "text": "Islandhopper Coast 233,-324",
+    "map": "Palpagos_Islands",
+    "x": 233,
+    "y": -324
+   }
+  ],
+  "rewards": [
+   "Exp +940"
+  ],
+  "next": [],
+  "prev": []
+ },
+ {
+  "id": "Sub_Scholar04",
+  "slug": "metal-on-your-mind",
+  "name": "Metal on Your Mind",
+  "kind": "Sub Mission",
+  "description": "So? Have you gathered any Chromite yet?\nIf you had a metal detector, you might be able to uncover some buried somewhere on this island.\nKeep your eyes peeled, now.",
+  "objectives": [
+   {
+    "text": "Give the Researcher 5 Chromite."
+   },
+   {
+    "text": "Chromite 5"
+   },
+   {
+    "text": "Deserted Ash Plateau -1396,-1052",
+    "map": "Palpagos_Islands",
+    "x": -1396,
+    "y": -1052
+   }
+  ],
+  "rewards": [
+   "Exp +25,350"
+  ],
+  "next": [],
+  "prev": []
+ },
+ {
+  "id": "Sub_Breeder01",
+  "slug": "breeding-basics",
+  "name": "Breeding Basics",
+  "kind": "Sub Mission",
+  "description": "Hey, did you manage to get those cakes?\nFive might be a bit much, but I'm serious about this breeding business.\nI'm counting on you!",
+  "objectives": [
+   {
+    "text": "Give the Breeder 5 Cakes."
+   },
+   {
+    "text": "Cake 5"
+   },
+   {
+    "text": "Sealed Realm of the Ardent -110,-473",
+    "map": "Palpagos_Islands",
+    "x": -110,
+    "y": -473
+   }
+  ],
+  "rewards": [
+   "Exp +1,925"
+  ],
+  "next": [],
+  "prev": []
+ },
+ {
+  "id": "Sub_Breeder02",
+  "slug": "farewell-under-the-sakura-tree",
+  "name": "Farewell Under the Sakura Tree",
+  "kind": "Sub Mission",
+  "description": "Don't tell me—you brought some Advanced Recovery Meds to share?!",
+  "objectives": [
+   {
+    "text": "Give the Breeder some Advanced Recovery Meds."
+   },
+   {
+    "text": "Advanced Recovery Meds 1"
+   },
+   {
+    "text": "Secluded Cemetery -640,239",
+    "map": "Palpagos_Islands",
+    "x": -640,
+    "y": 239
+   }
+  ],
+  "rewards": [
+   "Exp +25,350"
+  ],
+  "next": [],
+  "prev": []
+ },
+ {
+  "id": "Sub_Breeder03",
+  "slug": "no-mercy-for-pal-thieves",
+  "name": "No Mercy for Pal Thieves",
+  "kind": "Sub Mission",
+  "description": "Please, you've gotta get my precious Pal back from those Rayne Syndicate goons!\nHurry, they climbed up that ledge over there!",
+  "objectives": [
+   {
+    "text": "Sand Dunes Entrance 296,211",
+    "map": "Palpagos_Islands",
+    "x": 296,
+    "y": 211
+   },
+   {
+    "text": "Capture or defeat the Syndicate Crusher and recover the precious Pal, then return it to the Breeder."
+   },
+   {
+    "text": "Breeder's Precious Pal 1"
+   },
+   {
+    "text": "Sand Dunes Entrance 284,165",
+    "map": "Palpagos_Islands",
+    "x": 284,
+    "y": 165
+   }
+  ],
+  "rewards": [
+   "Exp +12,170"
+  ],
+  "next": [],
+  "prev": []
+ },
+ {
+  "id": "Sub_Breeder04",
+  "slug": "operation:-splatterina-spree",
+  "name": "Operation: Splatterina Spree",
+  "kind": "Sub Mission",
+  "description": "Do you have any Splatterinas for me?\nTen should be plenty for breeding. I'm counting on you!",
+  "objectives": [
+   {
+    "text": "Crimson Butcher Splatterina"
+   },
+   {
+    "text": "Splatterina"
+   },
+   {
+    "text": "Hidden Passage to the Oculus Gate -1047,-1249",
+    "map": "Palpagos_Islands",
+    "x": -1047,
+    "y": -1249
+   }
+  ],
+  "rewards": [
+   "Exp +35,490"
+  ],
+  "next": [],
+  "prev": []
+ },
+ {
+  "id": "Sub_Ranger01",
+  "slug": "hunting-essentials",
+  "name": "Hunting Essentials",
+  "kind": "Sub Mission",
+  "description": "I wonder if there's a calm, cool-headed Pal out there that can glide over sand like it's surfing.\nIf you find one with an aura of Serenity, be sure to let me know!",
+  "objectives": [
+   {
+    "text": "The Desert's Wrath Surfent Terra"
+   },
+   {
+    "text": "Surfent Terra"
+   },
+   {
+    "text": "Serenity"
+   },
+   {
+    "text": "PIDF Tower Entrance 540,333",
+    "map": "Palpagos_Islands",
+    "x": 540,
+    "y": 333
+   }
+  ],
+  "rewards": [
+   "Exp +17,745"
+  ],
+  "next": [],
+  "prev": []
+ },
+ {
+  "id": "Sub_Ranger02",
+  "slug": "the-fugitive",
+  "name": "The Fugitive",
+  "kind": "Sub Mission",
+  "description": "I'll never forgive that creep... They're just up ahead.\nPlease, give them the ass-kicking they deserve!",
+  "objectives": [
+   {
+    "text": "Syndicate Cleaner"
+   },
+   {
+    "text": "Scorched Obsidian Watchtower -477,-539",
+    "map": "Palpagos_Islands",
+    "x": -477,
+    "y": -539
+   },
+   {
+    "text": "Foot of the Volcano -359,-494",
+    "map": "Palpagos_Islands",
+    "x": -359,
+    "y": -494
+   }
+  ],
+  "rewards": [
+   "Exp +12,170"
+  ],
+  "next": [],
+  "prev": []
+ },
+ {
+  "id": "Sub_Ranger03",
+  "slug": "formidable-faleris-aqua",
+  "name": "Formidable Faleris Aqua",
+  "kind": "Sub Mission",
+  "description": "That massive Faleris Aqua is a real menace.\nIf you're planning on taking it on, double-check your gear first...or else.",
+  "objectives": [
+   {
+    "text": "Sentinel of the Tides Faleris Aqua"
+   },
+   {
+    "text": "Feybreak Tower Entrance -1306,-1620",
+    "map": "Palpagos_Islands",
+    "x": -1306,
+    "y": -1620
+   },
+   {
+    "text": "Capture or defeat Faleris Aqua, Sentinel of the Tides, then speak to the hunter"
+   },
+   {
+    "text": "Feybreak Tower Entrance -1245,-1588",
+    "map": "Palpagos_Islands",
+    "x": -1245,
+    "y": -1588
+   }
+  ],
+  "rewards": [
+   "Exp +35,490"
+  ],
+  "next": [],
+  "prev": []
+ },
+ {
+  "id": "Sub_Ranger04",
+  "slug": "a-sweet-deal",
+  "name": "A Sweet Deal",
+  "kind": "Sub Mission",
+  "description": "Have you found any Beegardes or Elizabees for me?\nJust three'll do!",
+  "objectives": [
+   {
+    "text": "Empress of the Hive Elizabee"
+   },
+   {
+    "text": "Captain of the Guard Beegarde"
+   },
+   {
+    "text": "Elizabee"
+   },
+   {
+    "text": "Beegarde"
+   },
+   {
+    "text": "Verdant Stream Watchtower 173,-126",
+    "map": "Palpagos_Islands",
+    "x": 173,
+    "y": -126
+   }
+  ],
+  "rewards": [
+   "Exp +3,550"
+  ],
+  "next": [],
+  "prev": []
+ },
+ {
+  "id": "Sub_Nomad01",
+  "slug": "a-true-ascent-ends-in-descent",
+  "name": "A True Ascent Ends in Descent",
+  "kind": "Sub Mission",
+  "description": "I heard Wumpos are super strong!\nI wonder if they'd help me carry my stuff...",
+  "objectives": [
+   {
+    "text": "Guardian of the Snowy Fields Wumpo"
+   },
+   {
+    "text": "Wumpo"
+   },
+   {
+    "text": "PAL Genetic Research Unit Tower Entrance -139,464",
+    "map": "Palpagos_Islands",
+    "x": -139,
+    "y": 464
+   }
+  ],
+  "rewards": [
+   "Exp +17,745"
+  ],
+  "next": [],
+  "prev": []
+ },
+ {
+  "id": "Sub_Nomad02",
+  "slug": "sparkly-and-smooth",
+  "name": "Sparkly and Smooth",
+  "kind": "Sub Mission",
+  "description": "The sparkly stuff you see at night is called Nightstar Sand.\nIt starts to glow after the sun sets.\nIf you've got any to spare, could you share some with me? Ten should be enough.",
+  "objectives": [
+   {
+    "text": "Give the Wanderer 10 Nightstar Sands."
+   },
+   {
+    "text": "Nightstar Sand 10"
+   },
+   {
+    "text": "Scorched Ashland -826,-844",
+    "map": "Palpagos_Islands",
+    "x": -826,
+    "y": -844
+   }
+  ],
+  "rewards": [
+   "Exp +25,350"
+  ],
+  "next": [],
+  "prev": []
+ },
+ {
+  "id": "Sub_Nomad03",
+  "slug": "dungeon-hunt",
+  "name": "Dungeon Hunt",
+  "kind": "Sub Mission",
+  "description": "Found a Tombat yet?\nI've got a special item for you once you do!",
+  "objectives": [
+   {
+    "text": "Trickster Tombat"
+   },
+   {
+    "text": "Tombat"
+   },
+   {
+    "text": "Grassy Behemoth Hills 142,-532",
+    "map": "Palpagos_Islands",
+    "x": 142,
+    "y": -532
+   }
+  ],
+  "rewards": [
+   "Exp +940"
+  ],
+  "next": [],
+  "prev": []
+ },
+ {
+  "id": "Sub_Nomad04",
+  "slug": "easygoing-adventures",
+  "name": "Easygoing Adventures",
+  "kind": "Sub Mission",
+  "description": "I wonder if there's an Easygoing Yakumo out there somewhere...\nI'd love to take a slow walk through these falling cherry blossoms with a Pal like that by my side.",
+  "objectives": [
+   {
+    "text": "Unwavering Loyalty Yakumo"
+   },
+   {
+    "text": "Yakumo"
+   },
+   {
+    "text": "Easygoing"
+   },
+   {
+    "text": "Moonflower Tower Entrance -631,226",
+    "map": "Palpagos_Islands",
+    "x": -631,
+    "y": 226
+   }
+  ],
+  "rewards": [
+   "Exp +25,350"
+  ],
+  "next": [],
+  "prev": []
+ },
+ {
+  "id": "Sub_Zoe01",
+  "slug": "dont-get-cocky",
+  "name": "Don't Get Cocky",
+  "kind": "Sub Mission",
+  "description": "So, did you manage to catch that Grizzbolt?\n\nI heard there are plenty of other powerful Pals in the No. 1 Wildlife Sanctuary, too.\nProbably a bit too much for you to handle.\n\nBut if you really want my approval, you’d better give it everything you’ve got.",
+  "objectives": [
+   {
+    "text": "Claws of Lightning Grizzbolt"
+   },
+   {
+    "text": "Grizzbolt"
+   },
+   {
+    "text": "Desolate Church 65,-412",
+    "map": "Palpagos_Islands",
+    "x": 65,
+    "y": -412
+   }
+  ],
+  "rewards": [
+   "Exp +940"
+  ],
+  "next": [],
+  "prev": []
+ },
+ {
+  "id": "Sub_Zoe02",
+  "slug": "i-still-dont-trust-you",
+  "name": "I Still Don't Trust You",
+  "kind": "Sub Mission",
+  "description": "Did you take care of those Free Pal Alliance weirdos for me?\nOr did you chicken out? Figures... Guess asking you was a mistake after all.\nMaybe I should just take care of it myself.",
+  "objectives": [
+   {
+    "text": "Free Pal Alliance Believer"
+   },
+   {
+    "text": "Free Pal Alliance Believer"
+   },
+   {
+    "text": "Free Pal Alliance Believer"
+   },
+   {
+    "text": "Free Pal Alliance Believer"
+   },
+   {
+    "text": "Free Pal Alliance Judicator"
+   },
+   {
+    "text": "Free Pal Alliance Believer"
+   },
+   {
+    "text": "Gloating Narcissist Ego"
+   },
+   {
+    "text": "Hostile Defender Brick"
+   },
+   {
+    "text": "Free Pal Alliance Judicator"
+   },
+   {
+    "text": "Free Pal Alliance Believer"
+   },
+   {
+    "text": "Free Pal Alliance Judicator"
+   },
+   {
+    "text": "Free Pal Alliance Believer"
+   },
+   {
+    "text": "Free Pal Alliance Believer"
+   },
+   {
+    "text": "Capture or defeat {TargetNumber} Free Pal Alliance members, then talk to Zoe"
+   },
+   {
+    "text": "Desolate Church 65,-412",
+    "map": "Palpagos_Islands",
+    "x": 65,
+    "y": -412
+   }
+  ],
+  "rewards": [
+   "Exp +1,015"
+  ],
+  "next": [],
+  "prev": []
+ },
+ {
+  "id": "Sub_Zoe03",
+  "slug": "a-warm-memory",
+  "name": "A Warm Memory",
+  "kind": "Sub Mission",
+  "description": "Did you find what I asked for? I think I left it near some old ruins, or what was left of them...\nBut I guess there's no way it'd still be there. It's been years.\nDon't worry about it. I wasn't really expecting anything anyway.",
+  "objectives": [
+   {
+    "text": "Zoe's Tattered Memento 1"
+   },
+   {
+    "text": "Fort Ruins 185,-381",
+    "map": "Palpagos_Islands",
+    "x": 185,
+    "y": -381
+   },
+   {
+    "text": "Zoe's Tattered Memento 1"
+   },
+   {
+    "text": "Desolate Church 65,-412",
+    "map": "Palpagos_Islands",
+    "x": 65,
+    "y": -412
+   }
+  ],
+  "rewards": [
+   "Exp +1,090"
+  ],
+  "next": [],
+  "prev": []
+ },
+ {
+  "id": "Sub_Angler01",
+  "slug": "a-fine-day-for-fishing",
+  "name": "A Fine Day for Fishing",
+  "kind": "Sub Mission",
+  "description": "Having any luck with fishing? You should be able to find {PalName} in these waters.\nIf you manage to catch one, I hope you'll be generous enough to share a bit of its meat with me!",
+  "objectives": [
+   {
+    "text": "Give the Angler {TargetNumber} {TargetItem}."
+   },
+   {
+    "text": "Jelliette Bell Flesh 3"
+   },
+   {
+    "text": "Sunlit Isle 387,-453",
+    "map": "Palpagos_Islands",
+    "x": 387,
+    "y": -453
+   }
+  ],
+  "rewards": [
+   "Exp +940"
+  ],
+  "next": [],
+  "prev": []
+ },
+ {
+  "id": "Sub_PalDisplay_A_01",
+  "slug": "sub_paldisplay_a_01",
+  "name": "Pal Display A 01",
+  "kind": "Sub Mission",
+  "description": "",
+  "objectives": [
+   {
+    "text": "Small Settlement 73,-485",
+    "map": "Palpagos_Islands",
+    "x": 73,
+    "y": -485
+   }
+  ],
+  "rewards": [],
+  "next": [],
+  "prev": []
+ },
+ {
+  "id": "Sub_PalDisplay_B_01",
+  "slug": "sub_paldisplay_b_01",
+  "name": "Pal Display B 01",
+  "kind": "Sub Mission",
+  "description": "",
+  "objectives": [
+   {
+    "text": "Ravine Entrance -68,-424",
+    "map": "Palpagos_Islands",
+    "x": -68,
+    "y": -424
+   }
+  ],
+  "rewards": [],
+  "next": [],
+  "prev": []
+ },
+ {
+  "id": "Sub_PalDisplay_C_01",
+  "slug": "sub_paldisplay_c_01",
+  "name": "Pal Display C 01",
+  "kind": "Sub Mission",
+  "description": "",
+  "objectives": [
+   {
+    "text": "Hypocrite Hill 71,-245",
+    "map": "Palpagos_Islands",
+    "x": 71,
+    "y": -245
+   }
+  ],
+  "rewards": [],
+  "next": [],
+  "prev": []
+ },
+ {
+  "id": "Sub_PalDisplay_D_01",
+  "slug": "sub_paldisplay_d_01",
+  "name": "Pal Display D 01",
+  "kind": "Sub Mission",
+  "description": "",
+  "objectives": [
+   {
+    "text": "Gobfin's Turf 149,-209",
+    "map": "Palpagos_Islands",
+    "x": 149,
+    "y": -209
+   }
+  ],
+  "rewards": [],
+  "next": [],
+  "prev": []
+ },
+ {
+  "id": "Sub_PalDisplay_E_01",
+  "slug": "sub_paldisplay_e_01",
+  "name": "Pal Display E 01",
+  "kind": "Sub Mission",
+  "description": "",
+  "objectives": [
+   {
+    "text": "Duneshelter 360,340",
+    "map": "Palpagos_Islands",
+    "x": 360,
+    "y": 340
+   }
+  ],
+  "rewards": [],
+  "next": [],
+  "prev": []
+ },
+ {
+  "id": "Sub_PalDisplay_F_01",
+  "slug": "sub_paldisplay_f_01",
+  "name": "Pal Display F 01",
+  "kind": "Sub Mission",
+  "description": "",
+  "objectives": [
+   {
+    "text": "Mount Obsidian - Anubis Statue -538,-638",
+    "map": "Palpagos_Islands",
+    "x": -538,
+    "y": -638
+   }
+  ],
+  "rewards": [],
+  "next": [],
+  "prev": []
+ },
+ {
+  "id": "Sub_PalDisplay_G_01",
+  "slug": "sub_paldisplay_g_01",
+  "name": "Pal Display G 01",
+  "kind": "Sub Mission",
+  "description": "",
+  "objectives": [
+   {
+    "text": "Cold Shore -44,11",
+    "map": "Palpagos_Islands",
+    "x": -44,
+    "y": 11
+   }
+  ],
+  "rewards": [],
+  "next": [],
+  "prev": []
+ },
+ {
+  "id": "Sub_PalDisplay_H_01",
+  "slug": "sub_paldisplay_h_01",
+  "name": "Pal Display H 01",
+  "kind": "Sub Mission",
+  "description": "",
+  "objectives": [
+   {
+    "text": "Sakurajima - Mushroom Wetlands -463,132",
+    "map": "Palpagos_Islands",
+    "x": -463,
+    "y": 132
+   }
+  ],
+  "rewards": [],
+  "next": [],
+  "prev": []
+ },
+ {
+  "id": "Sub_PalDisplay_I_01",
+  "slug": "sub_paldisplay_i_01",
+  "name": "Pal Display I 01",
+  "kind": "Sub Mission",
+  "description": "",
+  "objectives": [
+   {
+    "text": "Stone Pillar Cave Entrance -898,-1014",
+    "map": "Palpagos_Islands",
+    "x": -898,
+    "y": -1014
+   }
+  ],
+  "rewards": [],
+  "next": [],
+  "prev": []
+ },
+ {
+  "id": "Sub_PalCaptureCountReward",
+  "slug": "request-from-a-wise-hunter",
+  "name": "Request from a Wise Hunter",
+  "kind": "Sub Mission",
+  "description": "Hey... I'm the one who monitors the balance of this region's ecosystem,\nkeeping an eye on the Pal population.\nRight now, I’m looking for someone who can help reduce their numbers",
+  "objectives": [
+   {
+    "text": "Fisherman's Point -478,-750",
+    "map": "Palpagos_Islands",
+    "x": -478,
+    "y": -750
+   }
+  ],
+  "rewards": [],
+  "next": [],
+  "prev": []
+ },
+ {
+  "id": "Sub_BossDefeatReward",
+  "slug": "request-from-a-veteran-hunter",
+  "name": "Request from a Veteran Hunter",
+  "kind": "Sub Mission",
+  "description": "Your eyes are no ordinary ones...\nA gaze sharp as that of a hunter, truly remarkable.\nI have a task I wish to entrust to someone of your skill.",
+  "objectives": [
+   {
+    "text": "Small Settlement 79,-475",
+    "map": "Palpagos_Islands",
+    "x": 79,
+    "y": -475
+   }
+  ],
+  "rewards": [],
+  "next": [],
+  "prev": []
+ },
+ {
+  "id": "Sub_PaldexReward",
+  "slug": "request-from-a-pal-ecological-researcher",
+  "name": "Request from a Pal Ecological Researcher",
+  "kind": "Sub Mission",
+  "description": "Nice to meet you. I'm researching Pal species and conducting an ecological survey,\nincluding unidentified species in this area...\nYou have a Palpedia, don't you? Would you mind showing it to me for reference?",
+  "objectives": [
+   {
+    "text": "Small Settlement 77,-482",
+    "map": "Palpagos_Islands",
+    "x": 77,
+    "y": -482
+   }
+  ],
+  "rewards": [],
+  "next": [],
+  "prev": []
+ },
+ {
+  "id": "Sub_FoodReward",
+  "slug": "request-from-an-arrogant-foodie",
+  "name": "Request from an Arrogant Foodie",
+  "kind": "Sub Mission",
+  "description": "Well, well...I'm the esteemed gourmet critic and chief advisor to the Palpagos Gourmet Society.\nI'll grace your dish with my refined palate, young upstart.\nThough I doubt a drifter like you could possibly satisfy my discerning tastes.",
+  "objectives": [
+   {
+    "text": "Duneshelter 343,367",
+    "map": "Palpagos_Islands",
+    "x": 343,
+    "y": 367
+   }
+  ],
+  "rewards": [],
+  "next": [],
+  "prev": []
+ },
+ {
+  "id": "Sub_Kigurumi01",
+  "slug": "thats-that-me,-depresso!",
+  "name": "That's That Me, Depresso!",
+  "kind": "Sub Mission",
+  "description": "Stop right there! I'm no Pal—don't throw that Sphere!\nOh, it's just you!\nYou're here about the costume, yeah?\nHaha!\nSo, got the goods? I need 20 High-Quality Cloth and 100 Venom Glands.\nIt takes tons of Venom Glands to nail Depresso's beautiful coat, you know.",
+  "objectives": [
+   {
+    "text": "Give 20 High-Quality Cloth and 100 Venom Glands to the Wannabe Depresso Islander."
+   },
+   {
+    "text": "High Quality Cloth 20"
+   },
+   {
+    "text": "Venom Gland 100"
+   },
+   {
+    "text": "Lake Center 21,-230",
+    "map": "Palpagos_Islands",
+    "x": 21,
+    "y": -230
+   }
+  ],
+  "rewards": [
+   "Exp +1,031"
+  ],
+  "next": [],
+  "prev": []
+ },
+ {
+  "id": "Sub_Zoe04",
+  "slug": "zoes-sphere",
+  "name": "Zoe's Sphere",
+  "kind": "Sub Mission",
+  "description": "Not taken care of it yet?\nI told you, teach those guys a lesson and I'll hook you up with a Sphere.",
+  "objectives": [
+   {
+    "text": "Free Pal Alliance Believer"
+   },
+   {
+    "text": "Free Pal Alliance Believer"
+   },
+   {
+    "text": "Free Pal Alliance Believer"
+   },
+   {
+    "text": "Free Pal Alliance Believer"
+   },
+   {
+    "text": "Free Pal Alliance Judicator"
+   },
+   {
+    "text": "Free Pal Alliance Believer"
+   },
+   {
+    "text": "Gloating Narcissist Ego"
+   },
+   {
+    "text": "Hostile Defender Brick"
+   },
+   {
+    "text": "Free Pal Alliance Judicator"
+   },
+   {
+    "text": "Free Pal Alliance Believer"
+   },
+   {
+    "text": "Free Pal Alliance Judicator"
+   },
+   {
+    "text": "Free Pal Alliance Believer"
+   },
+   {
+    "text": "Free Pal Alliance Believer"
+   },
+   {
+    "text": "Desolate Church 65,-412",
+    "map": "Palpagos_Islands",
+    "x": 65,
+    "y": -412
+   }
+  ],
+  "rewards": [],
+  "next": [],
+  "prev": []
+ },
+ {
+  "id": "Sub_Zoe_Halloween",
+  "slug": "happy-halloween!",
+  "name": "Happy Halloween!",
+  "kind": "Sub Mission",
+  "description": "(...Ears like Cattiva's might be kinda cute...\nIf I'm going with ears, I have to add a tail too...\nAnd maybe... Hmm...)",
+  "objectives": [
+   {
+    "text": "Craft Zoe’s Halloween Costume and hand it over to her."
+   },
+   {
+    "text": "Zoe's Halloween Costume 1"
+   },
+   {
+    "text": "Desolate Church 65,-412",
+    "map": "Palpagos_Islands",
+    "x": 65,
+    "y": -412
+   }
+  ],
+  "rewards": [
+   "Exp +1,031",
+   "SkinNames: Array"
+  ],
+  "next": [],
+  "prev": []
+ },
+ {
+  "id": "Sub_Kigurumi01_Replay",
+  "slug": "thats-that-me,-depresso!",
+  "name": "That's That Me, Depresso!",
+  "kind": "Sub Mission",
+  "description": "Stop right there! I'm no Pal—don't throw that Sphere!\nOh, it's just you!\nYou're here about the costume, yeah?\nHaha!\nSo, got the goods? I need 20 High-Quality Cloth and 100 Venom Glands.\nIt takes tons of Venom Glands to nail Depresso's beautiful coat, you know.",
+  "objectives": [
+   {
+    "text": "Give 20 High-Quality Cloth and 100 Venom Glands to the Wannabe Depresso Islander."
+   },
+   {
+    "text": "High Quality Cloth 20"
+   },
+   {
+    "text": "Venom Gland 100"
+   },
+   {
+    "text": "Lake Center 21,-230",
+    "map": "Palpagos_Islands",
+    "x": 21,
+    "y": -230
+   }
+  ],
+  "rewards": [
+   "Depresso Helmet 1",
+   "Depresso Armor 1"
+  ],
+  "next": [],
+  "prev": []
+ },
+ {
+  "id": "Sub_StrongOldMan01",
+  "slug": "captured-adventurer",
+  "name": "Captured Adventurer",
+  "kind": "Sub Mission",
+  "description": "You freed who you presume is an islander,\nbut that drew the attention of some Rayne Syndicate members.\n\nDrive them off and secure the area.",
+  "objectives": [
+   {
+    "text": "Syndicate Thug"
+   },
+   {
+    "text": "Syndicate Hunter"
+   },
+   {
+    "text": "Syndicate Elite"
+   },
+   {
+    "text": "Windswept Island Watchtower -18,-480",
+    "map": "Palpagos_Islands",
+    "x": -18,
+    "y": -480
+   },
+   {
+    "text": "Talk to the Mysterious Figure"
+   },
+   {
+    "text": "Windswept Island Watchtower -16,-478",
+    "map": "Palpagos_Islands",
+    "x": -16,
+    "y": -478
+   }
+  ],
+  "rewards": [
+   "Exp +330"
+  ],
+  "next": [],
+  "prev": []
+ },
+ {
+  "id": "Sub_StrongOldMan02",
+  "slug": "taking-down-a-bounty",
+  "name": "Taking Down a Bounty",
+  "kind": "Sub Mission",
+  "description": "You've run into the adventurer, Harold again,\nwho's stuck between a rocky situation and some tough foes.\n\nHe's thrilled to fight with his buddy in arms, and between the two of you,\ntaking out those bounties should be a piece of cake.",
+  "objectives": [
+   {
+    "text": "Elder"
+   },
+   {
+    "text": "Pristine Snow Field -353,302",
+    "map": "Palpagos_Islands",
+    "x": -353,
+    "y": 302
+   },
+   {
+    "text": "Pristine Snow Field -355,306",
+    "map": "Palpagos_Islands",
+    "x": -355,
+    "y": 306
+   }
+  ],
+  "rewards": [
+   "Exp +17,745"
+  ],
+  "next": [],
+  "prev": []
+ },
+ {
+  "id": "Sub_StrongOldMan03",
+  "slug": "the-proxy",
+  "name": "The Proxy",
+  "kind": "Sub Mission",
+  "description": "You've run into Harold again, but he's lost his usual cheerfulness.\nHe took on a request from a nearby village, but it's one that involves subduing a rampaging Pal.\nHe explained the situation with the grimmest expression you've ever seen on him,\nthen asked if you couldn't take this one on in his stead.\n\nThe moment you agreed, you could see the weight lift from his shoulders,\nbut...the shadows on his face still seemed to deepen.",
+  "objectives": [
+   {
+    "text": "Rampaging Flopie"
+   },
+   {
+    "text": "Sunreach Watchtower -263,-1531",
+    "map": "Palpagos_Islands",
+    "x": -263,
+    "y": -1531
+   },
+   {
+    "text": "Sunreach Watchtower -274,-1514",
+    "map": "Palpagos_Islands",
+    "x": -274,
+    "y": -1514
+   }
+  ],
+  "rewards": [
+   "Exp +48,165"
+  ],
+  "next": [],
+  "prev": []
+ },
+ {
+  "id": "Sub_StrongOldMan04",
+  "slug": "the-past",
+  "name": "The Past",
+  "kind": "Sub Mission",
+  "description": "Harold asked if he can confess something to you.\nYou suspect that he either wants forgiveness for an event in his past,\nor that he's hoping to bequeath a memory to someone, so that it outlasts him.\n\nStanding at the base of the World Tree,\nhis determined expression is so firmly set,\nyou find him impossible to read.",
+  "objectives": [
+   {
+    "text": "Listen to Harold's Story"
+   },
+   {
+    "text": "Secluded Cemetery -676,314",
+    "map": "Palpagos_Islands",
+    "x": -676,
+    "y": 314
+   }
+  ],
+  "rewards": [
+   "Exp +48,165"
+  ],
+  "next": [],
+  "prev": []
+ },
+ {
+  "id": "Sub_StrongOldMan05",
+  "slug": "the-knight’s-last-stand",
+  "name": "The Knight’s Last Stand",
+  "kind": "Sub Mission",
+  "description": "You serve as witness to the conclusion of their story.",
+  "objectives": [
+   {
+    "text": "Rampaging Silvegis"
+   },
+   {
+    "text": "Secluded Cemetery -674,311",
+    "map": "Palpagos_Islands",
+    "x": -674,
+    "y": 311
+   },
+   {
+    "text": "Secluded Cemetery -676,314",
+    "map": "Palpagos_Islands",
+    "x": -676,
+    "y": 314
+   }
+  ],
+  "rewards": [
+   "Exp +65,910"
+  ],
+  "next": [],
+  "prev": []
+ },
+ {
+  "id": "Sub_RookieExpeditionTeam01",
+  "slug": "the-rookie-expedition-team",
+  "name": "The Rookie Expedition Team",
+  "kind": "Sub Mission",
+  "description": "You suddenly came upon a group of three who were fatigued from fighting against Pals.\nYou should lend them a hand.",
+  "objectives": [
+   {
+    "text": "Rampaging Direhowl"
+   },
+   {
+    "text": "Sealed Realm of the Ardent -133,-443",
+    "map": "Palpagos_Islands",
+    "x": -133,
+    "y": -443
+   },
+   {
+    "text": "Sealed Realm of the Ardent -130,-445",
+    "map": "Palpagos_Islands",
+    "x": -130,
+    "y": -445
+   }
+  ],
+  "rewards": [
+   "Exp +330"
+  ],
+  "next": [],
+  "prev": []
+ },
+ {
+  "id": "Sub_RookieExpeditionTeam02",
+  "slug": "budding",
+  "name": "Budding",
+  "kind": "Sub Mission",
+  "description": "You met with the Expedition Team once more,\nbut this time, Carla is nowhere to be seen...",
+  "objectives": [
+   {
+    "text": "Rampaging Lovander"
+   },
+   {
+    "text": "Dry Sandy Beach Watchtower -655,-707",
+    "map": "Palpagos_Islands",
+    "x": -655,
+    "y": -707
+   },
+   {
+    "text": "Dry Sandy Beach Watchtower -644,-698",
+    "map": "Palpagos_Islands",
+    "x": -644,
+    "y": -698
+   },
+   {
+    "text": "Dry Sandy Beach Watchtower -665,-743",
+    "map": "Palpagos_Islands",
+    "x": -665,
+    "y": -743
+   }
+  ],
+  "rewards": [
+   "Exp +5,575"
+  ],
+  "next": [],
+  "prev": []
+ },
+ {
+  "id": "Sub_RookieExpeditionTeam03",
+  "slug": "growth",
+  "name": "Growth",
+  "kind": "Sub Mission",
+  "description": "You ran into Fia once again.\nShe seems to be searching for some way to become stronger.",
+  "objectives": [
+   {
+    "text": "Might Remedy 1"
+   },
+   {
+    "text": "Duneshelter 343,352",
+    "map": "Palpagos_Islands",
+    "x": 343,
+    "y": 352
+   }
+  ],
+  "rewards": [
+   "Exp +12,170"
+  ],
+  "next": [],
+  "prev": []
+ },
+ {
+  "id": "Sub_RookieExpeditionTeam04",
+  "slug": "a-sterile-flower",
+  "name": "A Sterile Flower",
+  "kind": "Sub Mission",
+  "description": "This time, Fia attacked you the moment her vacant eyes spotted you.\nThe only way you'll survive is by fighting her.",
+  "objectives": [
+   {
+    "text": "Sakurajima - Southern Sandbar -672,137",
+    "map": "Palpagos_Islands",
+    "x": -672,
+    "y": 137
+   }
+  ],
+  "rewards": [
+   "Exp +35,490"
+  ],
+  "next": [],
+  "prev": []
+ },
+ {
+  "id": "Sub_LoneWolf01",
+  "slug": "the-sable-loner",
+  "name": "The Sable Loner",
+  "kind": "Sub Mission",
+  "description": "You found a wounded {AmaterasuWolf_Dark}.",
+  "objectives": [
+   {
+    "text": "Moonflower Tower Entrance -628,231",
+    "map": "Palpagos_Islands",
+    "x": -628,
+    "y": 231
+   },
+   {
+    "text": "Moonflower Tower Entrance -628,231",
+    "map": "Palpagos_Islands",
+    "x": -628,
+    "y": 231
+   },
+   {
+    "text": "Moonflower Tower Entrance -628,230",
+    "map": "Palpagos_Islands",
+    "x": -628,
+    "y": 230
+   }
+  ],
+  "rewards": [
+   "Exp +25,350"
+  ],
+  "next": [
+   "Sub_LoneWolf02"
+  ],
+  "prev": []
+ },
+ {
+  "id": "Sub_LoneWolf02",
+  "slug": "reminiscent-wandering",
+  "name": "Reminiscent Wandering",
+  "kind": "Sub Mission",
+  "description": "Look for any clues that point to {AmaterasuWolf_Dark}'s master.",
+  "objectives": [
+   {
+    "text": "Scorched Ashland -839,-916",
+    "map": "Palpagos_Islands",
+    "x": -839,
+    "y": -916
+   },
+   {
+    "text": "Rampaging Jormuntide Ignis"
+   },
+   {
+    "text": "Scorched Ashland -847,-917",
+    "map": "Palpagos_Islands",
+    "x": -847,
+    "y": -917
+   },
+   {
+    "text": "Scorched Ashland -840,-916",
+    "map": "Palpagos_Islands",
+    "x": -840,
+    "y": -916
+   }
+  ],
+  "rewards": [
+   "Exp +35,490"
+  ],
+  "next": [],
+  "prev": [
+   "Sub_LoneWolf01"
+  ]
+ },
+ {
+  "id": "Sub_LoneWolf03",
+  "slug": "the-unsheathed-katana",
+  "name": "The Unsheathed Katana",
+  "kind": "Sub Mission",
+  "description": "You agreed to take care of the vicious Pal.",
+  "objectives": [
+   {
+    "text": "Scorched Ashland -840,-916",
+    "map": "Palpagos_Islands",
+    "x": -840,
+    "y": -916
+   },
+   {
+    "text": "Kitsun Noct"
+   },
+   {
+    "text": "Scorched Ashland -840,-916",
+    "map": "Palpagos_Islands",
+    "x": -840,
+    "y": -916
+   },
+   {
+    "text": "Shield Dragon Tunnel -1034,-938",
+    "map": "Palpagos_Islands",
+    "x": -1034,
+    "y": -938
+   }
+  ],
+  "rewards": [
+   "Exp +35,490"
+  ],
+  "next": [],
+  "prev": []
+ },
+ {
+  "id": "Sub_DeliverySulfur",
+  "slug": "stockpiling-<itemname-id=|sulfur|/>",
+  "name": "Stockpiling Sulfur",
+  "kind": "Sub Mission",
+  "description": "Gather 10 {Sulfur} and deliver them to the client.",
+  "objectives": [
+   {
+    "text": "Sulfur 10"
+   },
+   {
+    "text": "Sulfur 10"
+   },
+   {
+    "text": "Fisherman's Point -479,-746",
+    "map": "Palpagos_Islands",
+    "x": -479,
+    "y": -746
+   }
+  ],
+  "rewards": [
+   "Exp +3,550"
+  ],
+  "next": [],
+  "prev": []
+ },
+ {
+  "id": "Sub_DeliveryWood_Fine",
+  "slug": "stockpiling-<itemname-id=|wood_fine|/>",
+  "name": "Stockpiling Hardwood",
+  "kind": "Sub Mission",
+  "description": "Gather 10 {Wood_Fine} and deliver them to the client.",
+  "objectives": [
+   {
+    "text": "Hardwood 10"
+   },
+   {
+    "text": "Hardwood 10"
+   },
+   {
+    "text": "Fisherman's Point -474,-749",
+    "map": "Palpagos_Islands",
+    "x": -474,
+    "y": -749
+   }
+  ],
+  "rewards": [
+   "Exp +3,550"
+  ],
+  "next": [],
+  "prev": []
+ },
+ {
+  "id": "Sub_DeliveryQuartz",
+  "slug": "stockpiling-<itemname-id=|quartz|/>",
+  "name": "Stockpiling Pure Quartz",
+  "kind": "Sub Mission",
+  "description": "Gather 10 {Quartz} and deliver them to the client.",
+  "objectives": [
+   {
+    "text": "Pure Quartz 10"
+   },
+   {
+    "text": "Pure Quartz 10"
+   },
+   {
+    "text": "Unthawable Lake -100,304",
+    "map": "Palpagos_Islands",
+    "x": -100,
+    "y": 304
+   }
+  ],
+  "rewards": [
+   "Exp +12,170"
+  ],
+  "next": [],
+  "prev": []
+ },
+ {
+  "id": "Sub_DeliveryRainbowCrystal",
+  "slug": "stockpiling-<itemname-id=|rainbowcrystal|/>",
+  "name": "Stockpiling Hexolite Quartz",
+  "kind": "Sub Mission",
+  "description": "Gather 10 {RainbowCrystal} and deliver them to the client.",
+  "objectives": [
+   {
+    "text": "Hexolite Quartz 10"
+   },
+   {
+    "text": "Hexolite Quartz 10"
+   },
+   {
+    "text": "Shield Dragon Tunnel -1031,-934",
+    "map": "Palpagos_Islands",
+    "x": -1031,
+    "y": -934
+   }
+  ],
+  "rewards": [
+   "Exp +25,350"
+  ],
+  "next": [],
+  "prev": []
+ },
+ {
+  "id": "Sub_DeliverySkyIslandOre",
+  "slug": "stockpiling-<itemname-id=|skyislandore|/>",
+  "name": "Stockpiling Soralite",
+  "kind": "Sub Mission",
+  "description": "Gather 10 {SkyIslandOre} and deliver them to the client.",
+  "objectives": [
+   {
+    "text": "Soralite 10"
+   },
+   {
+    "text": "Soralite 10"
+   },
+   {
+    "text": "Farcry Marsh -338,-1390",
+    "map": "Palpagos_Islands",
+    "x": -338,
+    "y": -1390
+   }
+  ],
+  "rewards": [
+   "Exp +48,165"
+  ],
+  "next": [],
+  "prev": []
+ },
+ {
+  "id": "Sub_HowSurviveWorldTree",
+  "slug": "surviving-the-world-tree",
+  "name": "Surviving the World Tree",
+  "kind": "Sub Mission",
+  "description": "Gather a {Wood_WorldTree} and a {WorldTreeOre},\nthen report to the client.",
+  "objectives": [
+   {
+    "text": "Mythical Wood 1"
+   },
+   {
+    "text": "Paloxite 1"
+   },
+   {
+    "text": "The Verdant Rootpath 102,773",
+    "map": "The_World_Tree",
+    "x": 102,
+    "y": 773
+   }
+  ],
+  "rewards": [
+   "Exp +106,470\n\n\n\n\n\n\n\n\n\n\nSites\n\npoedb.tw\ntlidb.com\ndiablo4.cc -->\npoe2db.tw\npaldb.cc"
+  ],
+  "next": [],
+  "prev": []
+ }
+]

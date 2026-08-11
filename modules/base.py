@@ -95,6 +95,23 @@ class Choice(Setting):
         return value if value in self.options else self.default
 
 
+@dataclass(frozen=True)
+class Text(Setting):
+    """Free text - a hostname, a player name, a server password.
+
+    `secret` only masks the panel's entry box. The value still goes into
+    settings.json as plain text, because the overlay has to be able to read it
+    back and there is nowhere to hide a key that wouldn't ship next to it.
+    """
+
+    secret: bool = False
+
+    def coerce(self, value: Any) -> str:
+        if value is None:
+            return self.default
+        return value if isinstance(value, str) else str(value)
+
+
 def placement(x: int, y: int, scale: float = 1.0, opacity: float = 0.95) -> tuple[Setting, ...]:
     """The settings every drawn module has, with its own defaults filled in.
 
@@ -127,6 +144,9 @@ class Module:
     blurb: str = ""
     #: False for settings-only sections (see modules.general) - no window is made
     draws: bool = True
+    #: True if what's drawn changes on its own, not just when a setting does.
+    #: The host then calls update() on a fast timer between redraws.
+    live: bool = False
     settings: Sequence[Setting] = ()
 
     def defaults(self) -> dict[str, Any]:
@@ -146,6 +166,15 @@ class Module:
         opacity changes, so it can be a straight redraw with no diffing.
         """
         raise NotImplementedError
+
+    def update(self, canvas, cfg: dict[str, Any]) -> None:
+        """Live modules only: move what draw() already put on the canvas.
+
+        Runs several times a second on the UI thread, so it must be cheap and
+        must not block - no network, no disk. Deleting and recreating the whole
+        drawing here would flicker; the point of splitting it from draw() is
+        that the frame is built once and only the moving parts are touched.
+        """
 
     #: keys whose change the host can honour without redrawing anything
     CHEAP_KEYS = frozenset({"enabled", "x", "y", "opacity"})

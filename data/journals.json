@@ -1,0 +1,337 @@
+{
+ "source": "paldb.cc",
+ "coords": "world",
+ "note": "Unreal world coordinates in cm. See markers.py for the conversion.",
+ "notes": [
+  {
+   "name": "Auri's Diary - 1",
+   "series": "Auri's Diary",
+   "x": -775847.0,
+   "y": 43094.0
+  },
+  {
+   "name": "Auri's Diary - 2",
+   "series": "Auri's Diary",
+   "x": -803033.0,
+   "y": 48318.0
+  },
+  {
+   "name": "Auri's Diary - 3",
+   "series": "Auri's Diary",
+   "x": -811860.0,
+   "y": -109820.0
+  },
+  {
+   "name": "Auri's Diary - 4",
+   "series": "Auri's Diary",
+   "x": -817090.0,
+   "y": -42400.0
+  },
+  {
+   "name": "Auri's Diary - 5",
+   "series": "Auri's Diary",
+   "x": -734100.0,
+   "y": -50560.0
+  },
+  {
+   "name": "Auri's Diary - 6",
+   "series": "Auri's Diary",
+   "x": -739450.0,
+   "y": -99350.0
+  },
+  {
+   "name": "Axel Travers' Diary - 1",
+   "series": "Axel Travers' Diary",
+   "x": -249441.1,
+   "y": -148442.7
+  },
+  {
+   "name": "Bjorn Seligsson's Diary - 1",
+   "series": "Bjorn Seligsson's Diary",
+   "x": -727250.7,
+   "y": -337204.9
+  },
+  {
+   "name": "Bjorn Seligsson's Diary - 2",
+   "series": "Bjorn Seligsson's Diary",
+   "x": -661788.2,
+   "y": -286540.4
+  },
+  {
+   "name": "Bjorn Seligsson's Diary - 3",
+   "series": "Bjorn Seligsson's Diary",
+   "x": -680766.0,
+   "y": -228162.8
+  },
+  {
+   "name": "Bjorn Seligsson's Diary - 4",
+   "series": "Bjorn Seligsson's Diary",
+   "x": -554410.1,
+   "y": -145171.5
+  },
+  {
+   "name": "Bjorn Seligsson's Diary - 5",
+   "series": "Bjorn Seligsson's Diary",
+   "x": -897682.2,
+   "y": -441227.0
+  },
+  {
+   "name": "Castaway's Journal - Day 0",
+   "series": "Castaway's Journal",
+   "x": -257842.5,
+   "y": -47223.0
+  },
+  {
+   "name": "Castaway's Journal - Day 1-1",
+   "series": "Castaway's Journal",
+   "x": -363278.8,
+   "y": 276903.8
+  },
+  {
+   "name": "Castaway's Journal - Day 1-2",
+   "series": "Castaway's Journal",
+   "x": -334784.3,
+   "y": 197304.8
+  },
+  {
+   "name": "Castaway's Journal - Day 10",
+   "series": "Castaway's Journal",
+   "x": -294513.2,
+   "y": 149428.8
+  },
+  {
+   "name": "Castaway's Journal - Day 11",
+   "series": "Castaway's Journal",
+   "x": -305819.1,
+   "y": 213787.0
+  },
+  {
+   "name": "Castaway's Journal - Day 12-1",
+   "series": "Castaway's Journal",
+   "x": -338282.1,
+   "y": 79978.5
+  },
+  {
+   "name": "Castaway's Journal - Day 12-2",
+   "series": "Castaway's Journal",
+   "x": -108817.0,
+   "y": 209024.5
+  },
+  {
+   "name": "Castaway's Journal - Day 12-3",
+   "series": "Castaway's Journal",
+   "x": -111750.6,
+   "y": 242254.9
+  },
+  {
+   "name": "Castaway's Journal - Day 13",
+   "series": "Castaway's Journal",
+   "x": -226549.8,
+   "y": -100793.7
+  },
+  {
+   "name": "Castaway's Journal - Day 15",
+   "series": "Castaway's Journal",
+   "x": -146580.0,
+   "y": 301270.1
+  },
+  {
+   "name": "Castaway's Journal - Day 18",
+   "series": "Castaway's Journal",
+   "x": -315241.1,
+   "y": 173395.6
+  },
+  {
+   "name": "Castaway's Journal - Day 22",
+   "series": "Castaway's Journal",
+   "x": -118766.6,
+   "y": 385155.4
+  },
+  {
+   "name": "Castaway's Journal - Day 25",
+   "series": "Castaway's Journal",
+   "x": -425135.8,
+   "y": -174718.5
+  },
+  {
+   "name": "Castaway's Journal - Day 29",
+   "series": "Castaway's Journal",
+   "x": -402455.4,
+   "y": -28051.0
+  },
+  {
+   "name": "Castaway's Journal - Day 3",
+   "series": "Castaway's Journal",
+   "x": -297552.5,
+   "y": 244560.2
+  },
+  {
+   "name": "Castaway's Journal - Day 30",
+   "series": "Castaway's Journal",
+   "x": -35730.3,
+   "y": 290459.9
+  },
+  {
+   "name": "Castaway's Journal - Day 32",
+   "series": "Castaway's Journal",
+   "x": 55488.3,
+   "y": 392859.4
+  },
+  {
+   "name": "Castaway's Journal - Day 38",
+   "series": "Castaway's Journal",
+   "x": -185327.2,
+   "y": 37273.1
+  },
+  {
+   "name": "Castaway's Journal - Day 5",
+   "series": "Castaway's Journal",
+   "x": 82137.3,
+   "y": 232163.9
+  },
+  {
+   "name": "Castaway's Journal - Day 6",
+   "series": "Castaway's Journal",
+   "x": -210150.4,
+   "y": 50624.3
+  },
+  {
+   "name": "Castaway's Journal - Day 8",
+   "series": "Castaway's Journal",
+   "x": -315600.6,
+   "y": 187182.0
+  },
+  {
+   "name": "Castaway's Journal - Day XX",
+   "series": "Castaway's Journal",
+   "x": -340151.3,
+   "y": 219815.9
+  },
+  {
+   "name": "Castaway's Journal Day 2",
+   "series": "Castaway's Journal",
+   "x": -355891.8,
+   "y": 267443.5
+  },
+  {
+   "name": "Lily Everhart's Diary - 1",
+   "series": "Lily Everhart's Diary",
+   "x": -223189.6,
+   "y": 134498.5
+  },
+  {
+   "name": "Lily Everhart's Diary - 2",
+   "series": "Lily Everhart's Diary",
+   "x": -241933.3,
+   "y": 258173.6
+  },
+  {
+   "name": "Lily Everhart's Diary - 3",
+   "series": "Lily Everhart's Diary",
+   "x": -245568.7,
+   "y": 154861.5
+  },
+  {
+   "name": "A letter penned in crude handwriting:",
+   "series": "Loose note",
+   "x": -185964.2,
+   "y": 55638.5
+  },
+  {
+   "name": "Marcus Dryden's Diary - 1",
+   "series": "Marcus Dryden's Diary",
+   "x": 42675.4,
+   "y": 313641.2
+  },
+  {
+   "name": "Marcus Dryden's Diary - 2",
+   "series": "Marcus Dryden's Diary",
+   "x": 27732.4,
+   "y": 432083.2
+  },
+  {
+   "name": "Marcus Dryden's Diary - 3",
+   "series": "Marcus Dryden's Diary",
+   "x": 121473.1,
+   "y": 356847.9
+  },
+  {
+   "name": "Saya Kurosaki's Diary - 1",
+   "series": "Saya Kurosaki's Diary",
+   "x": -30652.6,
+   "y": -112970.7
+  },
+  {
+   "name": "Saya Kurosaki's Diary - 2",
+   "series": "Saya Kurosaki's Diary",
+   "x": -5174.3,
+   "y": -64212.8
+  },
+  {
+   "name": "Saya Kurosaki's Diary - 3",
+   "series": "Saya Kurosaki's Diary",
+   "x": -85253.1,
+   "y": -161407.5
+  },
+  {
+   "name": "Saya Kurosaki's Diary - 4",
+   "series": "Saya Kurosaki's Diary",
+   "x": -18050.5,
+   "y": -129575.2
+  },
+  {
+   "name": "Saya Kurosaki's Diary - 5",
+   "series": "Saya Kurosaki's Diary",
+   "x": -18655.8,
+   "y": -152533.8
+  },
+  {
+   "name": "Victor Ashford's Diary - 1",
+   "series": "Victor Ashford's Diary",
+   "x": -42137.5,
+   "y": 117812.8
+  },
+  {
+   "name": "Victor Ashford's Diary - 2",
+   "series": "Victor Ashford's Diary",
+   "x": 145643.6,
+   "y": 95477.3
+  },
+  {
+   "name": "Victor Ashford's Diary - 3",
+   "series": "Victor Ashford's Diary",
+   "x": 103666.9,
+   "y": 72074.1
+  },
+  {
+   "name": "Zoe Rayne's Diary - 1",
+   "series": "Zoe Rayne's Diary",
+   "x": -354575.6,
+   "y": 156362.0
+  },
+  {
+   "name": "Zoe Rayne's Diary - 2",
+   "series": "Zoe Rayne's Diary",
+   "x": -378067.7,
+   "y": 235013.9
+  },
+  {
+   "name": "Zoe Rayne's Diary - 3",
+   "series": "Zoe Rayne's Diary",
+   "x": -278642.0,
+   "y": 215975.7
+  },
+  {
+   "name": "Zoe Rayne's Diary - 4",
+   "series": "Zoe Rayne's Diary",
+   "x": -201124.0,
+   "y": -24022.1
+  },
+  {
+   "name": "Zoe Rayne's Diary - 5",
+   "series": "Zoe Rayne's Diary",
+   "x": -209798.6,
+   "y": -6681.3
+  }
+ ]
+}

@@ -16,8 +16,10 @@ from __future__ import annotations
 
 import math
 import tkinter as tk
+import tkinter.font as tkfont
 from pathlib import Path
 
+import markers
 import position
 
 from .base import TRANSPARENT_KEY, Choice, Module, Slider, Text, Toggle, outlined_text, placement
@@ -32,6 +34,11 @@ PLAYER_RING = "#2fa6ff"
 TRAIL_COLOR = (0x2f, 0xa6, 0xff)
 TEXT_COLOR = "#e8e4da"
 STALE_COLOR = "#ff8f5a"
+#: Journal notes: paper on the map, dimmer when pinned to the edge because it
+#: is a direction rather than a place.
+NOTE_COLOR = "#f6d98a"
+NOTE_EDGE_COLOR = "#b39a55"
+NOTE_OUTLINE = "#241d0e"
 
 #: Grid spacings to choose from, in map units. A 1/2.5/5 progression, so the
 #: labels stay round numbers at every view range.
@@ -94,6 +101,16 @@ class Minimap(Module):
         Slider("trail", "Trail length", 40, lo=0, hi=240, step=5,
                help="How many past positions to leave behind you. 0 turns the trail off. "
                     "At half a second a reading, 40 is about the last twenty seconds."),
+        Toggle("notes", "Journal notes", True,
+               help="Marks the 55 readable journal notes on Palpagos. Their positions "
+                    "ship with the overlay, so this needs nothing from the game."),
+        Slider("notes_range", "Notes within", 400, lo=50, hi=3000, step=10, unit="u",
+               help="How far away a note still counts. Ones inside the map sit where "
+                    "they are; ones further out but still inside this range are pinned "
+                    "to the edge pointing at them, so the map tells you which way to "
+                    "walk instead of only what you are standing on. The nearest one is "
+                    "named under the map."),
+        Toggle("notes_label", "Name the nearest note", True),
         Text("map_image", "Map image file", "",
              help="Optional PNG to scroll under the marker - drop one next to the overlay "
                   "and put its filename here. Without it you get the grid alone, which "
@@ -103,11 +120,14 @@ class Minimap(Module):
                     "measured from 0,0 at its centre. Only matters with an image set."),
         Toggle("image_flip", "Flip image north/south", False,
                help="If your map image comes out upside down, turn this on."),
-        Slider("world_origin", "Coordinate origin", position.MAP_ORIGIN,
-               lo=0, hi=400000, step=500,
+        Slider("world_origin", "Coordinate origin E/W", position.MAP_ORIGIN_X,
+               lo=-400000, hi=400000, step=1,
                help="Advanced. Converts the server's raw world coordinates into the "
-                    "numbers the game shows you. Only touch these two if the readout "
-                    "disagrees with the in-game map."),
+                    "numbers the game shows you, and places the note markers with them. "
+                    "The two axes have different origins - that is not a typo. Only "
+                    "touch these three if the readout disagrees with the in-game map."),
+        Slider("world_origin_y", "Coordinate origin N/S", position.MAP_ORIGIN_Y,
+               lo=-400000, hi=400000, step=1, help="Advanced. See above."),
         Slider("world_scale", "Coordinate scale", position.MAP_SCALE,
                lo=50, hi=2000, step=0.01, help="Advanced. See above."),
     )
@@ -118,8 +138,11 @@ class Minimap(Module):
         #: canvas item ids, rebuilt by every draw()
         self._grid: list[int] = []
         self._dots: list[int] = []
-        self._readout: int | None = None
-        self._status: int | None = None
+        self._notes: list[int] = []
+        self._readout: list[int] = []
+        self._status: list[int] = []
+        self._note_label: list[int] = []
+        self._label_font = None
         self._image_item: int | None = None
         #: (path, mtime) -> source PhotoImage, so the file is read once
         self._source_image: tuple[tuple, tk.PhotoImage] | None = None
@@ -223,7 +246,12 @@ class Minimap(Module):
         scale = cfg["scale"]
         self._grid.clear()
         self._dots.clear()
-        self._readout = self._status = self._image_item = None
+        self._notes.clear()
+        self._readout = []
+        self._status = []
+        self._note_label = []
+        self._label_font = None
+        self._image_item = None
 
         source = self._load_image(cfg, canvas)
         self._units_per_px = self._view_scale(source, cfg)[0]
@@ -251,6 +279,16 @@ class Minimap(Module):
             self._dots.append(canvas.create_oval(0, 0, 0, 0, outline="",
                                                  fill=_fade(t), state="hidden"))
 
+        # One polygon per shipped note, made here and moved by update() for the
+        # same reason as the grid. Created before the frame and the player so
+        # both stay on top of them.
+        if cfg["notes"]:
+            for _ in markers.notes(**position.calibration(cfg)):
+                self._notes.append(
+                    canvas.create_polygon(0, 0, 0, 0, 0, 0, 0, 0, fill=NOTE_COLOR,
+                                          outline=NOTE_OUTLINE, width=max(1, int(scale)),
+                                          state="hidden"))
+
         self._frame(canvas, box, scale)
         self._marker(canvas, box, scale)
 
@@ -260,9 +298,23 @@ class Minimap(Module):
         # get clipped by the canvas and cut in half by the border.
         if cfg["coords"]:
             self._readout = outlined_text(canvas, box / 2, box - max(10, 11 * scale),
-                                          "", TEXT_COLOR, 9 * scale)[-1]
+                                          "", TEXT_COLOR, 9 * scale)
         self._status = outlined_text(canvas, box / 2, box / 2 + max(20, 22 * scale),
-                                     "", STALE_COLOR, 8.5 * scale)[-1]
+                                     "", STALE_COLOR, 8.5 * scale)
+
+        # The nearest note's name goes in a strip *under* the map rather than
+        # on it: names run to nearly thirty characters, and anything that long
+        # inside the box is either clipped by the canvas or sitting on top of
+        # the ground you are trying to read.
+        if cfg["notes"] and cfg["notes_label"]:
+            strip = max(13, int(14 * scale))
+            # mirrors what outlined_text will build, so _fit measures the font
+            # that actually gets drawn rather than one that looks like it
+            self._label_font = tkfont.Font(root=canvas, family="Segoe UI",
+                                           size=max(7, int(8 * scale)), weight="bold")
+            self._note_label = outlined_text(canvas, box / 2, box + strip / 2,
+                                             "", NOTE_COLOR, 8 * scale)
+            return box, box + strip
         return box, box
 
     def _frame(self, canvas, box, scale) -> None:
@@ -297,8 +349,8 @@ class Minimap(Module):
         if fix is None:
             self._hide_all(canvas)
             self._say(canvas, self._status, self._tracker.status())
-            if self._readout is not None:
-                canvas.itemconfigure(self._readout, text="")
+            self._say(canvas, self._readout, "")
+            self._say(canvas, self._note_label, "")
             return
 
         if fix.stale():
@@ -311,16 +363,22 @@ class Minimap(Module):
             self._scroll_image(self._source_image[1], cfg, fix.x, fix.y)
         self._place_grid(canvas, cfg, fix)
         self._place_trail(canvas, cfg, fix)
+        self._place_notes(canvas, cfg, fix)
 
-        if self._readout is not None:
-            canvas.itemconfigure(self._readout, text=f"{fix.x:.0f}, {fix.y:.0f}")
+        self._say(canvas, self._readout, f"{fix.x:.0f}, {fix.y:.0f}")
 
-    def _say(self, canvas, item, text) -> None:
-        if item is not None:
+    def _say(self, canvas, items, text) -> None:
+        """Set every copy of one piece of text - the halo as well as the face.
+
+        outlined_text returns eight black copies and the coloured one; writing
+        to the last alone leaves the halo blank, which is exactly the case
+        where the text is over a bright sky and needs it.
+        """
+        for item in items:
             canvas.itemconfigure(item, text=text)
 
     def _hide_all(self, canvas) -> None:
-        for item in self._grid + self._dots:
+        for item in self._grid + self._dots + self._notes:
             canvas.itemconfigure(item, state="hidden")
 
     #: history kept regardless of the current trail setting, so turning the
@@ -369,6 +427,70 @@ class Minimap(Module):
                     canvas.itemconfigure(item, state="normal")
                 else:
                     canvas.itemconfigure(item, state="hidden")
+
+    def _place_notes(self, canvas, cfg, fix) -> None:
+        """Journal notes: where they are, or which way they are.
+
+        A note further away than the map can show is pinned to the edge in the
+        direction of it rather than dropped. On a 250-unit map that is nearly
+        all of them, and a marker layer that only lights up once you are already
+        standing on the thing would be decoration.
+        """
+        if not self._notes:
+            return
+
+        box = self._box
+        half = box / 2
+        size = max(2.5, 3.4 * cfg["scale"])
+        # keep a pinned marker clear of the border, which is drawn over it
+        margin = max(2.0, 3.0 * cfg["scale"]) + size
+
+        found = markers.near(fix.x, fix.y, float(cfg["notes_range"]),
+                             limit=len(self._notes), **position.calibration(cfg))
+
+        for item, (distance, note) in zip(self._notes, found):
+            px, py = self._to_screen(fix, note.x, note.y)
+            dx, dy = px - half, py - half
+            reach = max(abs(dx), abs(dy))
+            pinned = reach > half - margin
+            if pinned:
+                # slide it back along the same bearing until it sits on the edge
+                scale_back = (half - margin) / reach if reach else 0.0
+                px, py = half + dx * scale_back, half + dy * scale_back
+            edge = size * (0.8 if pinned else 1.0)
+            canvas.coords(item, px, py - edge, px + edge, py, px, py + edge, px - edge, py)
+            canvas.itemconfigure(item, state="normal",
+                                 fill=NOTE_EDGE_COLOR if pinned else NOTE_COLOR)
+
+        for item in self._notes[len(found):]:
+            canvas.itemconfigure(item, state="hidden")
+
+        if self._note_label:
+            if found:
+                distance, note = found[0]
+                self._say(canvas, self._note_label,
+                          self._fit(f"{note.name} · {distance:.0f}u", box))
+            else:
+                self._say(canvas, self._note_label, "")
+
+    def _fit(self, text: str, width: float) -> str:
+        """Trim `text` to the width of the map, since that is all there is.
+
+        Measured rather than counted: the names run from 'Auri's Diary - 1' to
+        'Castaway's Journal - Day 12-1' and the font is proportional, so a
+        character budget would either clip the long ones or waste the strip.
+        """
+        font = self._label_font
+        if font is None:
+            return text
+        limit = max(20.0, width - 6)
+        if font.measure(text) <= limit:
+            return text
+        ellipsis = "…"
+        trimmed = text
+        while trimmed and font.measure(trimmed + ellipsis) > limit:
+            trimmed = trimmed[:-1]
+        return (trimmed.rstrip() + ellipsis) if trimmed else ""
 
     def _place_trail(self, canvas, cfg, fix) -> None:
         if not self._dots:

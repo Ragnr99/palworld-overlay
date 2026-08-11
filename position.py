@@ -40,11 +40,22 @@ import urllib.request
 from dataclasses import dataclass
 
 #: Unreal world units -> the coordinates Palworld shows you on its own map.
-#: The axes swap: in-game X comes from world Y. These are the community-standard
-#: constants and they match the numbers the game prints, but they are exposed as
-#: settings too - see the minimap module's calibration help.
-MAP_ORIGIN = 157000.0
-MAP_SCALE = 459.42
+#: The axes swap: in-game X comes from world Y, in-game Y from world X, and the
+#: two axes do NOT share an origin - a mistake worth stating plainly here,
+#: because using one origin for both is silently wrong by about 600 in-game
+#: units on the north/south axis, which is most of an island.
+#:
+#:     in-game x = (world y - 158000) / 459
+#:     in-game y = (world x + 123888) / 459
+#:
+#: These are paldb.cc's transform constants (its map.js builds them from
+#: perPixel = 459 and the landscape bounds), and they were checked against the
+#: published coordinates of the journal notes in data/journals.json: every one
+#: lands within a couple of units of the number the guides print. They are still
+#: exposed as settings - see the minimap module's calibration help.
+MAP_ORIGIN_X = 158000.0
+MAP_ORIGIN_Y = -123888.0
+MAP_SCALE = 459.0
 
 #: The source names the settings panel offers. Defined here rather than in the
 #: module so the string that picks a source and the code that builds it can't
@@ -64,16 +75,19 @@ STALE_AFTER = 5.0
 
 
 def to_map(world_x: float, world_y: float,
-           origin: float = MAP_ORIGIN, scale: float = MAP_SCALE) -> tuple[float, float]:
+           origin_x: float = MAP_ORIGIN_X, origin_y: float = MAP_ORIGIN_Y,
+           scale: float = MAP_SCALE) -> tuple[float, float]:
     """Unreal world coordinates -> in-game map coordinates."""
     scale = scale or MAP_SCALE
-    return ((world_y - origin) / scale, (world_x - origin) / scale)
+    return ((world_y - origin_x) / scale, (world_x - origin_y) / scale)
 
 
 def to_world(map_x: float, map_y: float,
-             origin: float = MAP_ORIGIN, scale: float = MAP_SCALE) -> tuple[float, float]:
+             origin_x: float = MAP_ORIGIN_X, origin_y: float = MAP_ORIGIN_Y,
+             scale: float = MAP_SCALE) -> tuple[float, float]:
     """The inverse, kept next to it so the pair can't drift apart."""
-    return (map_y * scale + origin, map_x * scale + origin)
+    scale = scale or MAP_SCALE
+    return (map_y * scale + origin_y, map_x * scale + origin_x)
 
 
 @dataclass(frozen=True)
@@ -148,11 +162,11 @@ class RestSource(Source):
     """
 
     def __init__(self, host: str, port: int, password: str, player: str = "",
-                 username: str = "admin",
-                 origin: float = MAP_ORIGIN, scale: float = MAP_SCALE):
+                 username: str = "admin", origin_x: float = MAP_ORIGIN_X,
+                 origin_y: float = MAP_ORIGIN_Y, scale: float = MAP_SCALE):
         self.url = f"http://{host.strip() or '127.0.0.1'}:{int(port)}/v1/api/players"
         self.player = player.strip().casefold()
-        self.origin, self.scale = origin, scale
+        self.origin_x, self.origin_y, self.scale = origin_x, origin_y, scale
         self.status = "connecting"
         token = base64.b64encode(f"{username}:{password}".encode()).decode()
         self._headers = {"Authorization": f"Basic {token}",
@@ -198,7 +212,7 @@ class RestSource(Source):
             return None
 
         self.status = "ok"
-        x, y = to_map(world_x, world_y, self.origin, self.scale)
+        x, y = to_map(world_x, world_y, self.origin_x, self.origin_y, self.scale)
         return Fix(x, y, time.monotonic(), str(chosen.get("name", "")))
 
 
@@ -217,8 +231,18 @@ def make_source(cfg: dict) -> Source:
                       port=int(_number(cfg, "port", 8212)) or 8212,
                       password=str(cfg.get("password", "")),
                       player=str(cfg.get("player", "")),
-                      origin=_number(cfg, "world_origin", MAP_ORIGIN),
-                      scale=_number(cfg, "world_scale", MAP_SCALE) or MAP_SCALE)
+                      **calibration(cfg))
+
+
+def calibration(cfg: dict) -> dict:
+    """The three numbers that convert world coordinates, from a settings block.
+
+    One reader for it, used by both the player position and the note markers,
+    so the two can't end up on different maps.
+    """
+    return {"origin_x": _number(cfg, "world_origin", MAP_ORIGIN_X),
+            "origin_y": _number(cfg, "world_origin_y", MAP_ORIGIN_Y),
+            "scale": _number(cfg, "world_scale", MAP_SCALE) or MAP_SCALE}
 
 
 # ---------------- tracker ----------------
@@ -227,7 +251,7 @@ def _source_key(cfg: dict) -> tuple:
     """What a source is built from. A change here means rebuild it."""
     return tuple(str(cfg.get(k, "")) for k in
                  ("source", "host", "port", "password", "player",
-                  "world_origin", "world_scale"))
+                  "world_origin", "world_origin_y", "world_scale"))
 
 
 class Tracker:

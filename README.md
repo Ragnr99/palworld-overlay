@@ -2,9 +2,9 @@
 
 Always-on-top, click-through overlays for Palworld, with a settings panel to
 position and size them. Two of them so far: a diagram of the element chart, and
-a live minimap that shows where you are without opening the in-game map. No
-window frame and no background panel, just the artwork over whatever is behind
-it.
+a live minimap that shows where you are - and where the journal notes are -
+without opening the in-game map. No window frame and no background panel, just
+the artwork over whatever is behind it.
 
 The mouse passes straight through, so an overlay can't be clicked, dragged,
 focused, or alt-tabbed to. It never steals focus from the game.
@@ -49,6 +49,7 @@ watcher.py  (resident, ~12 MB, asleep 5s at a time)
 | `watcher.py` | idles until Palworld appears, then launches `overlay.py` |
 | `gamestate.py` | the Win32 bit they ask: is the game running, is a UI open |
 | `position.py` | where the player is, polled off the UI thread. See [Minimap](#minimap) |
+| `markers.py` | what's fixed in the world - the journal notes in `data/` |
 | `hotkeys.py` | global hotkeys with no window, shared by watcher and overlay |
 | `launcher.py` | spawning a sibling script without loading tkinter to do it |
 | `icons/` | the nine element icons |
@@ -228,12 +229,56 @@ snaps to the nearest one and the grid and trail follow whatever it landed on.
 
 No map image ships with this: the game's own map is Pocketpair's art.
 
+### Journal notes
+
+The 55 readable journal notes on Palpagos - Palworld calls them Journals, most
+people call them notes or notebooks - are marked on the map as small gold
+diamonds. They never move, so unlike your own position this needs no server and
+no network: `data/journals.json` ships with the overlay and that is the whole
+source.
+
+**Notes within** is the useful control. A note inside the map sits where it
+actually is; one further out, but still inside this range, is pinned to the edge
+of the map in the direction of it, dimmer and slightly smaller. That is the
+point of the slider - at a 250-unit view range almost every note is off the map,
+and markers that only appear once you're standing on one would be decoration.
+The nearest note is named with its distance in a strip under the map, trimmed to
+fit rather than clipped.
+
+Turn the whole layer off with **Journal notes**, and the name strip alone off
+with **Name the nearest note**.
+
+```
+py -3.10 markers.py
+```
+
+lists what shipped, in in-game coordinates.
+
+The nine notes inside the World Tree are not included. That is a separate map
+with its own coordinate space, and plotting one of its coordinates on Palpagos
+would put it in the sea.
+
 ### If the numbers disagree with the game
 
 The server reports raw Unreal world coordinates, which get converted into the
-ones the game shows you. If the readout is offset or scaled wrong against the
-in-game map, **Coordinate origin** and **Coordinate scale** at the bottom of the
-section are that conversion, and correcting them fixes the map with it.
+ones the game shows you:
+
+```
+in-game x = (world y - 158000) / 459
+in-game y = (world x + 123888) / 459
+```
+
+The two axes do not share an origin, which is worth saying out loud because
+assuming they do is wrong by about 600 in-game units north/south - most of an
+island - and looks plausible right up until you compare it with the game. These
+are [paldb.cc](https://paldb.cc)'s transform constants, and they are checked
+against the published coordinates of all 55 notes: every one lands within a
+couple of units of the number the guides print.
+
+If the readout is still offset or scaled wrong against the in-game map,
+**Coordinate origin E/W**, **Coordinate origin N/S** and **Coordinate scale** at
+the bottom of the section are that conversion. They move the note markers with
+the player dot, so the two can never end up on different maps.
 
 ### Cost
 
